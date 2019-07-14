@@ -3,6 +3,7 @@ using System.Data;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
+using System.Windows.Forms.VisualStyles;
 using SearchOption = System.IO.SearchOption;
 using DAL;
 using BusinessLayer;
@@ -101,6 +102,12 @@ namespace UploadData
                 textOutputPath.Text = dialog.SelectedPath;
 
             }
+        }
+
+        private void btnBreakEven_Click(object sender, EventArgs e)
+        {
+            BreakEven be = new BreakEven();
+            be.ShowDialog();
         }
     }
 }

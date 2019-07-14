@@ -208,6 +208,7 @@
             this.btnBreakEven.TabIndex = 17;
             this.btnBreakEven.Text = "BreakEven";
             this.btnBreakEven.UseVisualStyleBackColor = true;
+            this.btnBreakEven.Click += new System.EventHandler(this.btnBreakEven_Click);
             // 
             // btnMarketCalendar
             // 

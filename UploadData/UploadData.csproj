@@ -56,6 +56,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BreakEven.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BreakEven.Designer.cs">
+      <DependentUpon>BreakEven.cs</DependentUpon>
+    </Compile>
     <Compile Include="ManageStockData.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -64,6 +70,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="BreakEven.resx">
+      <DependentUpon>BreakEven.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ManageStockData.resx">
       <DependentUpon>ManageStockData.cs</DependentUpon>
     </EmbeddedResource>
