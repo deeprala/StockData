@@ -51,448 +51,464 @@
             this.label23 = new System.Windows.Forms.Label();
             this.lblLngAvgRed = new System.Windows.Forms.Label();
             this.lblShortAvge = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.textBox4 = new System.Windows.Forms.TextBox();
-            this.textBox5 = new System.Windows.Forms.TextBox();
-            this.textBox6 = new System.Windows.Forms.TextBox();
-            this.textBox7 = new System.Windows.Forms.TextBox();
-            this.textBox8 = new System.Windows.Forms.TextBox();
-            this.textBox9 = new System.Windows.Forms.TextBox();
-            this.textBox10 = new System.Windows.Forms.TextBox();
-            this.textBox11 = new System.Windows.Forms.TextBox();
-            this.textBox12 = new System.Windows.Forms.TextBox();
-            this.textBox13 = new System.Windows.Forms.TextBox();
-            this.textBox14 = new System.Windows.Forms.TextBox();
-            this.textBox15 = new System.Windows.Forms.TextBox();
-            this.textBox16 = new System.Windows.Forms.TextBox();
-            this.textBox17 = new System.Windows.Forms.TextBox();
-            this.textBox18 = new System.Windows.Forms.TextBox();
-            this.textBox19 = new System.Windows.Forms.TextBox();
-            this.textBox20 = new System.Windows.Forms.TextBox();
-            this.textBox21 = new System.Windows.Forms.TextBox();
-            this.textBox22 = new System.Windows.Forms.TextBox();
-            this.textBox23 = new System.Windows.Forms.TextBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.txtOldStockNumbers = new System.Windows.Forms.TextBox();
+            this.txtOldPrice = new System.Windows.Forms.TextBox();
+            this.txtAmountSpent = new System.Windows.Forms.TextBox();
+            this.txtCurrentPrice = new System.Windows.Forms.TextBox();
+            this.txtLngUpDownAmt = new System.Windows.Forms.TextBox();
+            this.txtLngUpDownStock = new System.Windows.Forms.TextBox();
+            this.txtBreakEvenMoney = new System.Windows.Forms.TextBox();
+            this.txtUnroundedStockstoBuy = new System.Windows.Forms.TextBox();
+            this.txtRoundedStockstoBuy = new System.Windows.Forms.TextBox();
+            this.txtAdjBreakEvenMoney = new System.Windows.Forms.TextBox();
+            this.txtTotalShares = new System.Windows.Forms.TextBox();
+            this.txtTotalAmount = new System.Windows.Forms.TextBox();
+            this.txtAvgPrice = new System.Windows.Forms.TextBox();
+            this.txtLongAvgPercent = new System.Windows.Forms.TextBox();
+            this.txtLngAvgReductionPercent = new System.Windows.Forms.TextBox();
+            this.txtShortAvgPercent = new System.Windows.Forms.TextBox();
+            this.txtShortUpDownAmount = new System.Windows.Forms.TextBox();
+            this.txtShortUpDownStock = new System.Windows.Forms.TextBox();
+            this.txtLongProfitLoss = new System.Windows.Forms.TextBox();
+            this.txtLongAvgProfitLoss = new System.Windows.Forms.TextBox();
+            this.txtShortProfitLoss = new System.Windows.Forms.TextBox();
+            this.txtShortAvgProfitLoss = new System.Windows.Forms.TextBox();
+            this.txtStockProfitLoss = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.textBox24 = new System.Windows.Forms.TextBox();
-            this.textBox25 = new System.Windows.Forms.TextBox();
+            this.txtCurrentAmount = new System.Windows.Forms.TextBox();
+            this.txtShortAvgReductionPercent = new System.Windows.Forms.TextBox();
             this.lblShrtAvgRed = new System.Windows.Forms.Label();
+            this.btnSave = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // lblProfitLoss
             // 
             this.lblProfitLoss.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblProfitLoss.Location = new System.Drawing.Point(50, 9);
+            this.lblProfitLoss.Location = new System.Drawing.Point(56, 10);
             this.lblProfitLoss.Name = "lblProfitLoss";
-            this.lblProfitLoss.Size = new System.Drawing.Size(280, 29);
+            this.lblProfitLoss.Size = new System.Drawing.Size(315, 33);
             this.lblProfitLoss.TabIndex = 0;
             this.lblProfitLoss.Text = "LONG/SHORT - PROFIT/LOSS";
             // 
             // lblShareEntries
             // 
             this.lblShareEntries.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblShareEntries.Location = new System.Drawing.Point(50, 56);
+            this.lblShareEntries.Location = new System.Drawing.Point(56, 56);
             this.lblShareEntries.Name = "lblShareEntries";
-            this.lblShareEntries.Size = new System.Drawing.Size(280, 29);
+            this.lblShareEntries.Size = new System.Drawing.Size(315, 33);
             this.lblShareEntries.TabIndex = 1;
             this.lblShareEntries.Text = "Old Stock Numbers";
             // 
             // lblOldPrice
             // 
             this.lblOldPrice.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblOldPrice.Location = new System.Drawing.Point(50, 103);
+            this.lblOldPrice.Location = new System.Drawing.Point(56, 98);
             this.lblOldPrice.Name = "lblOldPrice";
-            this.lblOldPrice.Size = new System.Drawing.Size(280, 29);
+            this.lblOldPrice.Size = new System.Drawing.Size(315, 33);
             this.lblOldPrice.TabIndex = 2;
             this.lblOldPrice.Text = "Old Price";
             // 
             // lblAmountSpent
             // 
-            this.lblAmountSpent.Location = new System.Drawing.Point(50, 150);
+            this.lblAmountSpent.Location = new System.Drawing.Point(56, 220);
             this.lblAmountSpent.Name = "lblAmountSpent";
-            this.lblAmountSpent.Size = new System.Drawing.Size(280, 29);
+            this.lblAmountSpent.Size = new System.Drawing.Size(315, 33);
             this.lblAmountSpent.TabIndex = 3;
             this.lblAmountSpent.Text = "AmountSpent";
             // 
             // lblCurrentPrice
             // 
             this.lblCurrentPrice.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCurrentPrice.Location = new System.Drawing.Point(50, 197);
+            this.lblCurrentPrice.Location = new System.Drawing.Point(56, 140);
             this.lblCurrentPrice.Name = "lblCurrentPrice";
-            this.lblCurrentPrice.Size = new System.Drawing.Size(280, 29);
+            this.lblCurrentPrice.Size = new System.Drawing.Size(315, 33);
             this.lblCurrentPrice.TabIndex = 4;
             this.lblCurrentPrice.Text = "Current Price";
             // 
             // lblLongPresent1
             // 
-            this.lblLongPresent1.Location = new System.Drawing.Point(50, 276);
+            this.lblLongPresent1.Location = new System.Drawing.Point(56, 310);
             this.lblLongPresent1.Name = "lblLongPresent1";
-            this.lblLongPresent1.Size = new System.Drawing.Size(280, 29);
+            this.lblLongPresent1.Size = new System.Drawing.Size(315, 33);
             this.lblLongPresent1.TabIndex = 5;
             this.lblLongPresent1.Text = "LONG Present % Up / Down-Amount";
             // 
             // lblLongPresent2
             // 
-            this.lblLongPresent2.Location = new System.Drawing.Point(50, 323);
+            this.lblLongPresent2.Location = new System.Drawing.Point(56, 363);
             this.lblLongPresent2.Name = "lblLongPresent2";
-            this.lblLongPresent2.Size = new System.Drawing.Size(280, 29);
+            this.lblLongPresent2.Size = new System.Drawing.Size(315, 33);
             this.lblLongPresent2.TabIndex = 6;
             this.lblLongPresent2.Text = "LONG Present % Up / Down - Stock";
             // 
             // lblShortPresent
             // 
-            this.lblShortPresent.Location = new System.Drawing.Point(50, 370);
+            this.lblShortPresent.Location = new System.Drawing.Point(56, 416);
             this.lblShortPresent.Name = "lblShortPresent";
-            this.lblShortPresent.Size = new System.Drawing.Size(280, 29);
+            this.lblShortPresent.Size = new System.Drawing.Size(315, 33);
             this.lblShortPresent.TabIndex = 7;
             this.lblShortPresent.Text = "SHORT Present % Up / Down -  Amount";
             // 
             // lblShortPresent2
             // 
-            this.lblShortPresent2.Location = new System.Drawing.Point(50, 417);
+            this.lblShortPresent2.Location = new System.Drawing.Point(56, 469);
             this.lblShortPresent2.Name = "lblShortPresent2";
-            this.lblShortPresent2.Size = new System.Drawing.Size(280, 29);
+            this.lblShortPresent2.Size = new System.Drawing.Size(315, 33);
             this.lblShortPresent2.TabIndex = 8;
             this.lblShortPresent2.Text = "SHORT Present % Up / Down - Stock";
             // 
             // lblLngProfit
             // 
-            this.lblLngProfit.Location = new System.Drawing.Point(50, 464);
+            this.lblLngProfit.Location = new System.Drawing.Point(56, 522);
             this.lblLngProfit.Name = "lblLngProfit";
-            this.lblLngProfit.Size = new System.Drawing.Size(280, 29);
+            this.lblLngProfit.Size = new System.Drawing.Size(315, 33);
             this.lblLngProfit.TabIndex = 9;
             this.lblLngProfit.Text = "LONG Profit / Loss in $";
             // 
             // lblLongAvg
             // 
-            this.lblLongAvg.Location = new System.Drawing.Point(50, 511);
+            this.lblLongAvg.Location = new System.Drawing.Point(56, 575);
             this.lblLongAvg.Name = "lblLongAvg";
-            this.lblLongAvg.Size = new System.Drawing.Size(280, 29);
+            this.lblLongAvg.Size = new System.Drawing.Size(315, 33);
             this.lblLongAvg.TabIndex = 10;
             this.lblLongAvg.Text = "LONG Averaging Profit / Loss in $";
             // 
             // lblShortProfit
             // 
-            this.lblShortProfit.Location = new System.Drawing.Point(50, 558);
+            this.lblShortProfit.Location = new System.Drawing.Point(56, 628);
             this.lblShortProfit.Name = "lblShortProfit";
-            this.lblShortProfit.Size = new System.Drawing.Size(280, 29);
+            this.lblShortProfit.Size = new System.Drawing.Size(315, 33);
             this.lblShortProfit.TabIndex = 11;
             this.lblShortProfit.Text = "SHORT Profit / Loss in $";
             // 
             // lblShortAvg
             // 
-            this.lblShortAvg.Location = new System.Drawing.Point(50, 605);
+            this.lblShortAvg.Location = new System.Drawing.Point(56, 681);
             this.lblShortAvg.Name = "lblShortAvg";
-            this.lblShortAvg.Size = new System.Drawing.Size(280, 29);
+            this.lblShortAvg.Size = new System.Drawing.Size(315, 33);
             this.lblShortAvg.TabIndex = 12;
             this.lblShortAvg.Text = "SHORT Averaging Profit / Loss in $";
             // 
             // lblBreakEvenMoney
             // 
             this.lblBreakEvenMoney.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblBreakEvenMoney.Location = new System.Drawing.Point(723, 9);
+            this.lblBreakEvenMoney.Location = new System.Drawing.Point(55, 175);
             this.lblBreakEvenMoney.Name = "lblBreakEvenMoney";
-            this.lblBreakEvenMoney.Size = new System.Drawing.Size(280, 29);
+            this.lblBreakEvenMoney.Size = new System.Drawing.Size(236, 33);
             this.lblBreakEvenMoney.TabIndex = 15;
             this.lblBreakEvenMoney.Text = "Break Even Money";
             // 
             // lblUnrounded
             // 
-            this.lblUnrounded.Location = new System.Drawing.Point(723, 50);
+            this.lblUnrounded.Location = new System.Drawing.Point(628, 58);
             this.lblUnrounded.Name = "lblUnrounded";
-            this.lblUnrounded.Size = new System.Drawing.Size(183, 47);
+            this.lblUnrounded.Size = new System.Drawing.Size(205, 53);
             this.lblUnrounded.TabIndex = 16;
             this.lblUnrounded.Text = "UnRounded How Many Stocks To Buy ";
             // 
             // lblRoundedStocks
             // 
-            this.lblRoundedStocks.Location = new System.Drawing.Point(723, 97);
+            this.lblRoundedStocks.Location = new System.Drawing.Point(628, 111);
             this.lblRoundedStocks.Name = "lblRoundedStocks";
-            this.lblRoundedStocks.Size = new System.Drawing.Size(183, 47);
+            this.lblRoundedStocks.Size = new System.Drawing.Size(174, 53);
             this.lblRoundedStocks.TabIndex = 17;
             this.lblRoundedStocks.Text = "Rounded How Many Stocks To Buy";
             // 
             // lblAdjBreakEven
             // 
-            this.lblAdjBreakEven.Location = new System.Drawing.Point(723, 147);
+            this.lblAdjBreakEven.Location = new System.Drawing.Point(628, 167);
             this.lblAdjBreakEven.Name = "lblAdjBreakEven";
-            this.lblAdjBreakEven.Size = new System.Drawing.Size(280, 29);
+            this.lblAdjBreakEven.Size = new System.Drawing.Size(236, 33);
             this.lblAdjBreakEven.TabIndex = 18;
             this.lblAdjBreakEven.Text = "Adjusted Break Even Money";
             // 
             // lblTotalShares
             // 
-            this.lblTotalShares.Location = new System.Drawing.Point(723, 197);
+            this.lblTotalShares.Location = new System.Drawing.Point(628, 224);
             this.lblTotalShares.Name = "lblTotalShares";
-            this.lblTotalShares.Size = new System.Drawing.Size(280, 29);
+            this.lblTotalShares.Size = new System.Drawing.Size(236, 33);
             this.lblTotalShares.TabIndex = 19;
             this.lblTotalShares.Text = "Total Shares";
             // 
             // lblTotAmt
             // 
-            this.lblTotAmt.Location = new System.Drawing.Point(723, 244);
+            this.lblTotAmt.Location = new System.Drawing.Point(628, 276);
             this.lblTotAmt.Name = "lblTotAmt";
-            this.lblTotAmt.Size = new System.Drawing.Size(280, 29);
+            this.lblTotAmt.Size = new System.Drawing.Size(236, 33);
             this.lblTotAmt.TabIndex = 20;
             this.lblTotAmt.Text = "Total Amount";
             // 
             // lblAvgPrice
             // 
-            this.lblAvgPrice.Location = new System.Drawing.Point(723, 291);
+            this.lblAvgPrice.Location = new System.Drawing.Point(628, 329);
             this.lblAvgPrice.Name = "lblAvgPrice";
-            this.lblAvgPrice.Size = new System.Drawing.Size(280, 29);
+            this.lblAvgPrice.Size = new System.Drawing.Size(236, 33);
             this.lblAvgPrice.TabIndex = 21;
             this.lblAvgPrice.Text = "Averaging Price";
             // 
             // label23
             // 
-            this.label23.Location = new System.Drawing.Point(723, 338);
+            this.label23.Location = new System.Drawing.Point(628, 382);
             this.label23.Name = "label23";
-            this.label23.Size = new System.Drawing.Size(280, 29);
+            this.label23.Size = new System.Drawing.Size(236, 33);
             this.label23.TabIndex = 22;
             this.label23.Text = "LONG Averaging%";
             // 
             // lblLngAvgRed
             // 
-            this.lblLngAvgRed.Location = new System.Drawing.Point(723, 385);
+            this.lblLngAvgRed.Location = new System.Drawing.Point(628, 435);
             this.lblLngAvgRed.Name = "lblLngAvgRed";
-            this.lblLngAvgRed.Size = new System.Drawing.Size(280, 29);
+            this.lblLngAvgRed.Size = new System.Drawing.Size(236, 33);
             this.lblLngAvgRed.TabIndex = 23;
             this.lblLngAvgRed.Text = "LONG Averaging%Reduction";
             // 
             // lblShortAvge
             // 
-            this.lblShortAvge.Location = new System.Drawing.Point(723, 432);
+            this.lblShortAvge.Location = new System.Drawing.Point(628, 488);
             this.lblShortAvge.Name = "lblShortAvge";
-            this.lblShortAvge.Size = new System.Drawing.Size(280, 29);
+            this.lblShortAvge.Size = new System.Drawing.Size(236, 33);
             this.lblShortAvge.TabIndex = 24;
             this.lblShortAvge.Text = "SHORT Averaging%";
             // 
-            // textBox2
+            // txtOldStockNumbers
             // 
-            this.textBox2.Location = new System.Drawing.Point(336, 53);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(197, 22);
-            this.textBox2.TabIndex = 26;
+            this.txtOldStockNumbers.Location = new System.Drawing.Point(343, 53);
+            this.txtOldStockNumbers.Name = "txtOldStockNumbers";
+            this.txtOldStockNumbers.Size = new System.Drawing.Size(185, 24);
+            this.txtOldStockNumbers.TabIndex = 26;
             // 
-            // textBox3
+            // txtOldPrice
             // 
-            this.textBox3.Location = new System.Drawing.Point(336, 100);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(197, 22);
-            this.textBox3.TabIndex = 27;
+            this.txtOldPrice.Location = new System.Drawing.Point(343, 94);
+            this.txtOldPrice.Name = "txtOldPrice";
+            this.txtOldPrice.Size = new System.Drawing.Size(185, 24);
+            this.txtOldPrice.TabIndex = 27;
+            this.txtOldPrice.TextChanged += new System.EventHandler(this.txtOldPrice_TextChanged);
             // 
-            // textBox4
+            // txtAmountSpent
             // 
-            this.textBox4.Location = new System.Drawing.Point(336, 147);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(197, 22);
-            this.textBox4.TabIndex = 28;
+            this.txtAmountSpent.Location = new System.Drawing.Point(343, 216);
+            this.txtAmountSpent.Name = "txtAmountSpent";
+            this.txtAmountSpent.Size = new System.Drawing.Size(185, 24);
+            this.txtAmountSpent.TabIndex = 28;
             // 
-            // textBox5
+            // txtCurrentPrice
             // 
-            this.textBox5.Location = new System.Drawing.Point(336, 194);
-            this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(197, 22);
-            this.textBox5.TabIndex = 29;
+            this.txtCurrentPrice.Location = new System.Drawing.Point(343, 136);
+            this.txtCurrentPrice.Name = "txtCurrentPrice";
+            this.txtCurrentPrice.Size = new System.Drawing.Size(185, 24);
+            this.txtCurrentPrice.TabIndex = 29;
+            this.txtCurrentPrice.TextChanged += new System.EventHandler(this.txtCurrentPrice_TextChanged);
             // 
-            // textBox6
+            // txtLngUpDownAmt
             // 
-            this.textBox6.Location = new System.Drawing.Point(336, 273);
-            this.textBox6.Name = "textBox6";
-            this.textBox6.Size = new System.Drawing.Size(197, 22);
-            this.textBox6.TabIndex = 30;
+            this.txtLngUpDownAmt.Location = new System.Drawing.Point(343, 307);
+            this.txtLngUpDownAmt.Name = "txtLngUpDownAmt";
+            this.txtLngUpDownAmt.Size = new System.Drawing.Size(185, 24);
+            this.txtLngUpDownAmt.TabIndex = 30;
             // 
-            // textBox7
+            // txtLngUpDownStock
             // 
-            this.textBox7.Location = new System.Drawing.Point(336, 320);
-            this.textBox7.Name = "textBox7";
-            this.textBox7.Size = new System.Drawing.Size(197, 22);
-            this.textBox7.TabIndex = 31;
+            this.txtLngUpDownStock.Location = new System.Drawing.Point(343, 360);
+            this.txtLngUpDownStock.Name = "txtLngUpDownStock";
+            this.txtLngUpDownStock.Size = new System.Drawing.Size(185, 24);
+            this.txtLngUpDownStock.TabIndex = 31;
             // 
-            // textBox8
+            // txtBreakEvenMoney
             // 
-            this.textBox8.Location = new System.Drawing.Point(954, 6);
-            this.textBox8.Name = "textBox8";
-            this.textBox8.Size = new System.Drawing.Size(197, 22);
-            this.textBox8.TabIndex = 32;
+            this.txtBreakEvenMoney.Location = new System.Drawing.Point(342, 173);
+            this.txtBreakEvenMoney.Name = "txtBreakEvenMoney";
+            this.txtBreakEvenMoney.Size = new System.Drawing.Size(186, 24);
+            this.txtBreakEvenMoney.TabIndex = 32;
+            this.txtBreakEvenMoney.TextChanged += new System.EventHandler(this.txtBreakEvenMoney_TextChanged);
             // 
-            // textBox9
+            // txtUnroundedStockstoBuy
             // 
-            this.textBox9.Location = new System.Drawing.Point(954, 53);
-            this.textBox9.Name = "textBox9";
-            this.textBox9.Size = new System.Drawing.Size(197, 22);
-            this.textBox9.TabIndex = 33;
+            this.txtUnroundedStockstoBuy.Location = new System.Drawing.Point(874, 62);
+            this.txtUnroundedStockstoBuy.Name = "txtUnroundedStockstoBuy";
+            this.txtUnroundedStockstoBuy.Size = new System.Drawing.Size(221, 24);
+            this.txtUnroundedStockstoBuy.TabIndex = 33;
             // 
-            // textBox10
+            // txtRoundedStockstoBuy
             // 
-            this.textBox10.Location = new System.Drawing.Point(954, 100);
-            this.textBox10.Name = "textBox10";
-            this.textBox10.Size = new System.Drawing.Size(197, 22);
-            this.textBox10.TabIndex = 34;
+            this.txtRoundedStockstoBuy.Location = new System.Drawing.Point(874, 114);
+            this.txtRoundedStockstoBuy.Name = "txtRoundedStockstoBuy";
+            this.txtRoundedStockstoBuy.Size = new System.Drawing.Size(221, 24);
+            this.txtRoundedStockstoBuy.TabIndex = 34;
             // 
-            // textBox11
+            // txtAdjBreakEvenMoney
             // 
-            this.textBox11.Location = new System.Drawing.Point(954, 147);
-            this.textBox11.Name = "textBox11";
-            this.textBox11.Size = new System.Drawing.Size(197, 22);
-            this.textBox11.TabIndex = 35;
+            this.txtAdjBreakEvenMoney.Location = new System.Drawing.Point(874, 167);
+            this.txtAdjBreakEvenMoney.Name = "txtAdjBreakEvenMoney";
+            this.txtAdjBreakEvenMoney.Size = new System.Drawing.Size(221, 24);
+            this.txtAdjBreakEvenMoney.TabIndex = 35;
             // 
-            // textBox12
+            // txtTotalShares
             // 
-            this.textBox12.Location = new System.Drawing.Point(954, 194);
-            this.textBox12.Name = "textBox12";
-            this.textBox12.Size = new System.Drawing.Size(197, 22);
-            this.textBox12.TabIndex = 36;
+            this.txtTotalShares.Location = new System.Drawing.Point(874, 220);
+            this.txtTotalShares.Name = "txtTotalShares";
+            this.txtTotalShares.Size = new System.Drawing.Size(221, 24);
+            this.txtTotalShares.TabIndex = 36;
             // 
-            // textBox13
+            // txtTotalAmount
             // 
-            this.textBox13.Location = new System.Drawing.Point(954, 241);
-            this.textBox13.Name = "textBox13";
-            this.textBox13.Size = new System.Drawing.Size(197, 22);
-            this.textBox13.TabIndex = 37;
+            this.txtTotalAmount.Location = new System.Drawing.Point(874, 273);
+            this.txtTotalAmount.Name = "txtTotalAmount";
+            this.txtTotalAmount.Size = new System.Drawing.Size(221, 24);
+            this.txtTotalAmount.TabIndex = 37;
             // 
-            // textBox14
+            // txtAvgPrice
             // 
-            this.textBox14.Location = new System.Drawing.Point(954, 288);
-            this.textBox14.Name = "textBox14";
-            this.textBox14.Size = new System.Drawing.Size(197, 22);
-            this.textBox14.TabIndex = 38;
+            this.txtAvgPrice.Location = new System.Drawing.Point(874, 326);
+            this.txtAvgPrice.Name = "txtAvgPrice";
+            this.txtAvgPrice.Size = new System.Drawing.Size(221, 24);
+            this.txtAvgPrice.TabIndex = 38;
             // 
-            // textBox15
+            // txtLongAvgPercent
             // 
-            this.textBox15.Location = new System.Drawing.Point(954, 335);
-            this.textBox15.Name = "textBox15";
-            this.textBox15.Size = new System.Drawing.Size(197, 22);
-            this.textBox15.TabIndex = 39;
+            this.txtLongAvgPercent.Location = new System.Drawing.Point(874, 379);
+            this.txtLongAvgPercent.Name = "txtLongAvgPercent";
+            this.txtLongAvgPercent.Size = new System.Drawing.Size(221, 24);
+            this.txtLongAvgPercent.TabIndex = 39;
             // 
-            // textBox16
+            // txtLngAvgReductionPercent
             // 
-            this.textBox16.Location = new System.Drawing.Point(954, 382);
-            this.textBox16.Name = "textBox16";
-            this.textBox16.Size = new System.Drawing.Size(197, 22);
-            this.textBox16.TabIndex = 40;
+            this.txtLngAvgReductionPercent.Location = new System.Drawing.Point(874, 432);
+            this.txtLngAvgReductionPercent.Name = "txtLngAvgReductionPercent";
+            this.txtLngAvgReductionPercent.Size = new System.Drawing.Size(221, 24);
+            this.txtLngAvgReductionPercent.TabIndex = 40;
             // 
-            // textBox17
+            // txtShortAvgPercent
             // 
-            this.textBox17.Location = new System.Drawing.Point(954, 429);
-            this.textBox17.Name = "textBox17";
-            this.textBox17.Size = new System.Drawing.Size(197, 22);
-            this.textBox17.TabIndex = 41;
+            this.txtShortAvgPercent.Location = new System.Drawing.Point(874, 485);
+            this.txtShortAvgPercent.Name = "txtShortAvgPercent";
+            this.txtShortAvgPercent.Size = new System.Drawing.Size(221, 24);
+            this.txtShortAvgPercent.TabIndex = 41;
             // 
-            // textBox18
+            // txtShortUpDownAmount
             // 
-            this.textBox18.Location = new System.Drawing.Point(336, 367);
-            this.textBox18.Name = "textBox18";
-            this.textBox18.Size = new System.Drawing.Size(197, 22);
-            this.textBox18.TabIndex = 42;
+            this.txtShortUpDownAmount.Location = new System.Drawing.Point(343, 413);
+            this.txtShortUpDownAmount.Name = "txtShortUpDownAmount";
+            this.txtShortUpDownAmount.Size = new System.Drawing.Size(185, 24);
+            this.txtShortUpDownAmount.TabIndex = 42;
             // 
-            // textBox19
+            // txtShortUpDownStock
             // 
-            this.textBox19.Location = new System.Drawing.Point(336, 414);
-            this.textBox19.Name = "textBox19";
-            this.textBox19.Size = new System.Drawing.Size(197, 22);
-            this.textBox19.TabIndex = 43;
+            this.txtShortUpDownStock.Location = new System.Drawing.Point(343, 466);
+            this.txtShortUpDownStock.Name = "txtShortUpDownStock";
+            this.txtShortUpDownStock.Size = new System.Drawing.Size(185, 24);
+            this.txtShortUpDownStock.TabIndex = 43;
             // 
-            // textBox20
+            // txtLongProfitLoss
             // 
-            this.textBox20.Location = new System.Drawing.Point(336, 461);
-            this.textBox20.Name = "textBox20";
-            this.textBox20.Size = new System.Drawing.Size(197, 22);
-            this.textBox20.TabIndex = 44;
+            this.txtLongProfitLoss.Location = new System.Drawing.Point(343, 519);
+            this.txtLongProfitLoss.Name = "txtLongProfitLoss";
+            this.txtLongProfitLoss.Size = new System.Drawing.Size(185, 24);
+            this.txtLongProfitLoss.TabIndex = 44;
             // 
-            // textBox21
+            // txtLongAvgProfitLoss
             // 
-            this.textBox21.Location = new System.Drawing.Point(336, 508);
-            this.textBox21.Name = "textBox21";
-            this.textBox21.Size = new System.Drawing.Size(197, 22);
-            this.textBox21.TabIndex = 45;
+            this.txtLongAvgProfitLoss.Location = new System.Drawing.Point(343, 572);
+            this.txtLongAvgProfitLoss.Name = "txtLongAvgProfitLoss";
+            this.txtLongAvgProfitLoss.Size = new System.Drawing.Size(185, 24);
+            this.txtLongAvgProfitLoss.TabIndex = 45;
             // 
-            // textBox22
+            // txtShortProfitLoss
             // 
-            this.textBox22.Location = new System.Drawing.Point(336, 555);
-            this.textBox22.Name = "textBox22";
-            this.textBox22.Size = new System.Drawing.Size(197, 22);
-            this.textBox22.TabIndex = 46;
+            this.txtShortProfitLoss.Location = new System.Drawing.Point(343, 624);
+            this.txtShortProfitLoss.Name = "txtShortProfitLoss";
+            this.txtShortProfitLoss.Size = new System.Drawing.Size(185, 24);
+            this.txtShortProfitLoss.TabIndex = 46;
             // 
-            // textBox23
+            // txtShortAvgProfitLoss
             // 
-            this.textBox23.Location = new System.Drawing.Point(336, 602);
-            this.textBox23.Name = "textBox23";
-            this.textBox23.Size = new System.Drawing.Size(197, 22);
-            this.textBox23.TabIndex = 47;
+            this.txtShortAvgProfitLoss.Location = new System.Drawing.Point(343, 677);
+            this.txtShortAvgProfitLoss.Name = "txtShortAvgProfitLoss";
+            this.txtShortAvgProfitLoss.Size = new System.Drawing.Size(185, 24);
+            this.txtShortAvgProfitLoss.TabIndex = 47;
             // 
-            // textBox1
+            // txtStockProfitLoss
             // 
-            this.textBox1.Location = new System.Drawing.Point(336, 6);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(197, 22);
-            this.textBox1.TabIndex = 25;
+            this.txtStockProfitLoss.Location = new System.Drawing.Point(343, 7);
+            this.txtStockProfitLoss.Name = "txtStockProfitLoss";
+            this.txtStockProfitLoss.Size = new System.Drawing.Size(185, 24);
+            this.txtStockProfitLoss.TabIndex = 25;
             // 
             // label1
             // 
-            this.label1.Location = new System.Drawing.Point(50, 234);
+            this.label1.Location = new System.Drawing.Point(56, 263);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(280, 29);
+            this.label1.Size = new System.Drawing.Size(315, 33);
             this.label1.TabIndex = 48;
             this.label1.Text = "Current Amount";
             // 
-            // textBox24
+            // txtCurrentAmount
             // 
-            this.textBox24.Location = new System.Drawing.Point(336, 231);
-            this.textBox24.Name = "textBox24";
-            this.textBox24.Size = new System.Drawing.Size(197, 22);
-            this.textBox24.TabIndex = 49;
+            this.txtCurrentAmount.Location = new System.Drawing.Point(343, 260);
+            this.txtCurrentAmount.Name = "txtCurrentAmount";
+            this.txtCurrentAmount.Size = new System.Drawing.Size(185, 24);
+            this.txtCurrentAmount.TabIndex = 49;
             // 
-            // textBox25
+            // txtShortAvgReductionPercent
             // 
-            this.textBox25.Location = new System.Drawing.Point(954, 471);
-            this.textBox25.Name = "textBox25";
-            this.textBox25.Size = new System.Drawing.Size(197, 22);
-            this.textBox25.TabIndex = 51;
+            this.txtShortAvgReductionPercent.Location = new System.Drawing.Point(874, 532);
+            this.txtShortAvgReductionPercent.Name = "txtShortAvgReductionPercent";
+            this.txtShortAvgReductionPercent.Size = new System.Drawing.Size(221, 24);
+            this.txtShortAvgReductionPercent.TabIndex = 51;
             // 
             // lblShrtAvgRed
             // 
-            this.lblShrtAvgRed.Location = new System.Drawing.Point(723, 474);
+            this.lblShrtAvgRed.Location = new System.Drawing.Point(628, 535);
             this.lblShrtAvgRed.Name = "lblShrtAvgRed";
-            this.lblShrtAvgRed.Size = new System.Drawing.Size(280, 29);
+            this.lblShrtAvgRed.Size = new System.Drawing.Size(236, 33);
             this.lblShrtAvgRed.TabIndex = 50;
             this.lblShrtAvgRed.Text = "SHORT Averaging%Reduction";
             // 
+            // btnSave
+            // 
+            this.btnSave.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSave.Location = new System.Drawing.Point(660, 609);
+            this.btnSave.Name = "btnSave";
+            this.btnSave.Size = new System.Drawing.Size(336, 81);
+            this.btnSave.TabIndex = 52;
+            this.btnSave.Text = "Calculate and Save";
+            this.btnSave.UseVisualStyleBackColor = true;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
+            // 
             // BreakEven
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
-            this.ClientSize = new System.Drawing.Size(1294, 797);
-            this.Controls.Add(this.textBox25);
+            this.ClientSize = new System.Drawing.Size(1456, 863);
+            this.Controls.Add(this.btnSave);
+            this.Controls.Add(this.txtShortAvgReductionPercent);
             this.Controls.Add(this.lblShrtAvgRed);
-            this.Controls.Add(this.textBox24);
+            this.Controls.Add(this.txtCurrentAmount);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.textBox23);
-            this.Controls.Add(this.textBox22);
-            this.Controls.Add(this.textBox21);
-            this.Controls.Add(this.textBox20);
-            this.Controls.Add(this.textBox19);
-            this.Controls.Add(this.textBox18);
-            this.Controls.Add(this.textBox17);
-            this.Controls.Add(this.textBox16);
-            this.Controls.Add(this.textBox15);
-            this.Controls.Add(this.textBox14);
-            this.Controls.Add(this.textBox13);
-            this.Controls.Add(this.textBox12);
-            this.Controls.Add(this.textBox11);
-            this.Controls.Add(this.textBox10);
-            this.Controls.Add(this.textBox9);
-            this.Controls.Add(this.textBox8);
-            this.Controls.Add(this.textBox7);
-            this.Controls.Add(this.textBox6);
-            this.Controls.Add(this.textBox5);
-            this.Controls.Add(this.textBox4);
-            this.Controls.Add(this.textBox3);
-            this.Controls.Add(this.textBox2);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.txtShortAvgProfitLoss);
+            this.Controls.Add(this.txtShortProfitLoss);
+            this.Controls.Add(this.txtLongAvgProfitLoss);
+            this.Controls.Add(this.txtLongProfitLoss);
+            this.Controls.Add(this.txtShortUpDownStock);
+            this.Controls.Add(this.txtShortUpDownAmount);
+            this.Controls.Add(this.txtShortAvgPercent);
+            this.Controls.Add(this.txtLngAvgReductionPercent);
+            this.Controls.Add(this.txtLongAvgPercent);
+            this.Controls.Add(this.txtAvgPrice);
+            this.Controls.Add(this.txtTotalAmount);
+            this.Controls.Add(this.txtTotalShares);
+            this.Controls.Add(this.txtAdjBreakEvenMoney);
+            this.Controls.Add(this.txtRoundedStockstoBuy);
+            this.Controls.Add(this.txtUnroundedStockstoBuy);
+            this.Controls.Add(this.txtBreakEvenMoney);
+            this.Controls.Add(this.txtLngUpDownStock);
+            this.Controls.Add(this.txtLngUpDownAmt);
+            this.Controls.Add(this.txtCurrentPrice);
+            this.Controls.Add(this.txtAmountSpent);
+            this.Controls.Add(this.txtOldPrice);
+            this.Controls.Add(this.txtOldStockNumbers);
+            this.Controls.Add(this.txtStockProfitLoss);
             this.Controls.Add(this.lblShortAvge);
             this.Controls.Add(this.lblLngAvgRed);
             this.Controls.Add(this.label23);
@@ -516,6 +532,7 @@
             this.Controls.Add(this.lblOldPrice);
             this.Controls.Add(this.lblShareEntries);
             this.Controls.Add(this.lblProfitLoss);
+            this.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Name = "BreakEven";
             this.Text = "BreakEven";
             this.ResumeLayout(false);
@@ -548,32 +565,33 @@
         private System.Windows.Forms.Label label23;
         private System.Windows.Forms.Label lblLngAvgRed;
         private System.Windows.Forms.Label lblShortAvge;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.TextBox textBox4;
-        private System.Windows.Forms.TextBox textBox5;
-        private System.Windows.Forms.TextBox textBox6;
-        private System.Windows.Forms.TextBox textBox7;
-        private System.Windows.Forms.TextBox textBox8;
-        private System.Windows.Forms.TextBox textBox9;
-        private System.Windows.Forms.TextBox textBox10;
-        private System.Windows.Forms.TextBox textBox11;
-        private System.Windows.Forms.TextBox textBox12;
-        private System.Windows.Forms.TextBox textBox13;
-        private System.Windows.Forms.TextBox textBox14;
-        private System.Windows.Forms.TextBox textBox15;
-        private System.Windows.Forms.TextBox textBox16;
-        private System.Windows.Forms.TextBox textBox17;
-        private System.Windows.Forms.TextBox textBox18;
-        private System.Windows.Forms.TextBox textBox19;
-        private System.Windows.Forms.TextBox textBox20;
-        private System.Windows.Forms.TextBox textBox21;
-        private System.Windows.Forms.TextBox textBox22;
-        private System.Windows.Forms.TextBox textBox23;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox txtOldStockNumbers;
+        private System.Windows.Forms.TextBox txtOldPrice;
+        private System.Windows.Forms.TextBox txtAmountSpent;
+        private System.Windows.Forms.TextBox txtCurrentPrice;
+        private System.Windows.Forms.TextBox txtLngUpDownAmt;
+        private System.Windows.Forms.TextBox txtLngUpDownStock;
+        private System.Windows.Forms.TextBox txtBreakEvenMoney;
+        private System.Windows.Forms.TextBox txtUnroundedStockstoBuy;
+        private System.Windows.Forms.TextBox txtRoundedStockstoBuy;
+        private System.Windows.Forms.TextBox txtAdjBreakEvenMoney;
+        private System.Windows.Forms.TextBox txtTotalShares;
+        private System.Windows.Forms.TextBox txtTotalAmount;
+        private System.Windows.Forms.TextBox txtAvgPrice;
+        private System.Windows.Forms.TextBox txtLongAvgPercent;
+        private System.Windows.Forms.TextBox txtLngAvgReductionPercent;
+        private System.Windows.Forms.TextBox txtShortAvgPercent;
+        private System.Windows.Forms.TextBox txtShortUpDownAmount;
+        private System.Windows.Forms.TextBox txtShortUpDownStock;
+        private System.Windows.Forms.TextBox txtLongProfitLoss;
+        private System.Windows.Forms.TextBox txtLongAvgProfitLoss;
+        private System.Windows.Forms.TextBox txtShortProfitLoss;
+        private System.Windows.Forms.TextBox txtShortAvgProfitLoss;
+        private System.Windows.Forms.TextBox txtStockProfitLoss;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox textBox24;
-        private System.Windows.Forms.TextBox textBox25;
+        private System.Windows.Forms.TextBox txtCurrentAmount;
+        private System.Windows.Forms.TextBox txtShortAvgReductionPercent;
         private System.Windows.Forms.Label lblShrtAvgRed;
+        private System.Windows.Forms.Button btnSave;
     }
 }
