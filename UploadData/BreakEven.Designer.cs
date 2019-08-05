@@ -78,7 +78,8 @@
             this.txtCurrentAmount = new System.Windows.Forms.TextBox();
             this.txtShortAvgReductionPercent = new System.Windows.Forms.TextBox();
             this.lblShrtAvgRed = new System.Windows.Forms.Label();
-            this.btnSave = new System.Windows.Forms.Button();
+            this.btnCalculate = new System.Windows.Forms.Button();
+            this.Save = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // lblProfitLoss
@@ -464,16 +465,27 @@
             this.lblShrtAvgRed.TabIndex = 50;
             this.lblShrtAvgRed.Text = "SHORT Averaging%Reduction";
             // 
-            // btnSave
+            // btnCalculate
             // 
-            this.btnSave.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSave.Location = new System.Drawing.Point(660, 609);
-            this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(336, 81);
-            this.btnSave.TabIndex = 52;
-            this.btnSave.Text = "Calculate and Save";
-            this.btnSave.UseVisualStyleBackColor = true;
-            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
+            this.btnCalculate.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCalculate.Location = new System.Drawing.Point(660, 609);
+            this.btnCalculate.Name = "btnCalculate";
+            this.btnCalculate.Size = new System.Drawing.Size(214, 81);
+            this.btnCalculate.TabIndex = 52;
+            this.btnCalculate.Text = "Calculate ";
+            this.btnCalculate.UseVisualStyleBackColor = true;
+            this.btnCalculate.Click += new System.EventHandler(this.btnCalculate_Click);
+            // 
+            // Save
+            // 
+            this.Save.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Save.Location = new System.Drawing.Point(913, 609);
+            this.Save.Name = "Save";
+            this.Save.Size = new System.Drawing.Size(218, 81);
+            this.Save.TabIndex = 53;
+            this.Save.Text = "Save";
+            this.Save.UseVisualStyleBackColor = true;
+            this.Save.Click += new System.EventHandler(this.Save_Click);
             // 
             // BreakEven
             // 
@@ -481,7 +493,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.ClientSize = new System.Drawing.Size(1456, 863);
-            this.Controls.Add(this.btnSave);
+            this.Controls.Add(this.Save);
+            this.Controls.Add(this.btnCalculate);
             this.Controls.Add(this.txtShortAvgReductionPercent);
             this.Controls.Add(this.lblShrtAvgRed);
             this.Controls.Add(this.txtCurrentAmount);
@@ -592,6 +605,7 @@
         private System.Windows.Forms.TextBox txtCurrentAmount;
         private System.Windows.Forms.TextBox txtShortAvgReductionPercent;
         private System.Windows.Forms.Label lblShrtAvgRed;
-        private System.Windows.Forms.Button btnSave;
+        private System.Windows.Forms.Button btnCalculate;
+        private System.Windows.Forms.Button Save;
     }
 }

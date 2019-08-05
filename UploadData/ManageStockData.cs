@@ -19,6 +19,9 @@ namespace UploadData
             success.Visible = false;
         }
 
+        public static string strDataserver;
+        public static string strDatabase;
+        public static string dataConnectionString;
 
 
         private void btnUploadData_Click(object sender, EventArgs e)
@@ -27,9 +30,9 @@ namespace UploadData
             success.Visible = false;
             Cursor = Cursors.WaitCursor;
 
-            var strDataserver = textDataServer.Text.ToLower();
-            var strDatabase = textDatabase.Text.ToLower();
-            var dataConnectionString = "Data Source=" + strDataserver + ";Initial Catalog=" + strDatabase + "; Integrated Security=SSPI;";
+             strDataserver = textDataServer.Text.ToLower();
+             strDatabase = textDatabase.Text.ToLower();
+             dataConnectionString = "Data Source=" + strDataserver + ";Initial Catalog=" + strDatabase + "; Integrated Security=SSPI;";
             var fileDir = new DirectoryInfo(folderPath.Text);
             var outputPath = textOutputPath.Text.ToLower()+ @"\output.csv";
 
@@ -107,6 +110,9 @@ namespace UploadData
         private void btnBreakEven_Click(object sender, EventArgs e)
         {
             BreakEven be = new BreakEven();
+            strDataserver = textDataServer.Text.ToLower();
+            strDatabase = textDatabase.Text.ToLower();
+            dataConnectionString = "Data Source=" + strDataserver + ";Initial Catalog=" + strDatabase + "; Integrated Security=SSPI;";
             be.ShowDialog();
         }
     }

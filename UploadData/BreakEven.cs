@@ -1,12 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Data.SqlClient;
 using System.Windows.Forms;
+using Logger;
+
 
 namespace UploadData
 {
@@ -14,6 +10,11 @@ namespace UploadData
     {
         public double amountSpent = 0.0;
         public double currentAmount = 0.0;
+
+        public static string strDataserver;
+        public static string strDatabase;
+        public static string dataConnectionString;
+
         public BreakEven()
         {
             InitializeComponent();
@@ -28,19 +29,19 @@ namespace UploadData
 
         private void txtCurrentPrice_TextChanged(object sender, EventArgs e)
         {
-            double longPresentUpDownAmt = 0.0;
+            double longPercentUpDownAmt = 0.0;
             double longPresentUpDownStock = 0.0;
 
             currentAmount = Convert.ToDouble(txtOldStockNumbers.Text) * Convert.ToDouble(txtCurrentPrice.Text);
             txtCurrentAmount.Text = currentAmount.ToString("F");
 
-            longPresentUpDownAmt = -(1 - currentAmount / amountSpent) * 100;
-            txtLngUpDownAmt.Text = longPresentUpDownAmt.ToString("F");
+            longPercentUpDownAmt = -(1 - currentAmount / amountSpent) * 100;
+            txtLngUpDownAmt.Text = longPercentUpDownAmt.ToString("F");
 
             longPresentUpDownStock = -(1 - Convert.ToDouble(txtCurrentPrice.Text) / Convert.ToDouble(txtOldPrice.Text)) * 100;
             txtLngUpDownStock.Text = longPresentUpDownStock.ToString("F");
 
-            txtShortUpDownAmount.Text  = (-longPresentUpDownAmt).ToString("F");
+            txtShortUpDownAmount.Text  = (-longPercentUpDownAmt).ToString("F");
             txtShortUpDownStock.Text  = (-longPresentUpDownStock).ToString("F");
 
             txtLongProfitLoss.Text = (currentAmount - amountSpent).ToString("F");
@@ -48,14 +49,6 @@ namespace UploadData
 
             txtShortProfitLoss.Text = (-(currentAmount - amountSpent)).ToString("F");
 
-        }
-
-
-        private void btnSave_Click(object sender, EventArgs e)
-        {
-
-            Calculate();
-           
         }
 
         private void txtBreakEvenMoney_TextChanged(object sender, EventArgs e)
@@ -100,6 +93,67 @@ namespace UploadData
             txtShortAvgProfitLoss.Text =
                 (-(currentAmount + Convert.ToDouble(txtBreakEvenMoney.Text) - Convert.ToDouble(txtTotalAmount.Text)))
                 .ToString("F");
+        }
+
+        private void Save_Click(object sender, EventArgs e)
+        {
+            //BreakEvenData.InsertDataIntoBreakEven(dataConnectionString);
+
+            // change the data source value as needed LN443397
+            using (SqlConnection dbConnection =
+                    new SqlConnection(ManageStockData.dataConnectionString))
+                //using (SqlConnection dbConnection =
+                //new SqlConnection("Data Source=LN443397\\LOCAL;Initial Catalog=RAMTEST;Integrated Security=SSPI;"))
+                //RAMESHhrd2in1
+                //rameshdi5
+                try
+                {
+                    {
+                        dbConnection.Open();
+
+                        var insertCommandText = @"INSERT INTO [dbo].[BreakEven]
+          ([LongShortProfitLoss] ,[OldStockNumbers]          ,[OldPrice]          ,[AmountSpent]          ,[CurrentPrice]          ,[CurrentAmount]
+          ,[Long%UpDownAmount]          ,[Long%UpDownStock]          ,[Short%UpDownAmount]          ,[Short%UpDownStock]
+          ,[LongProfitLoss]          ,[LongAvgProfitLoss]
+          ,[ShortProfitLoss]
+          ,[ShortAvgProfitLoss]
+          ,[BreakEvenMoney]
+          ,[UnroundedStocktoBuy]
+          ,[RoundedSTockstoBuy]
+          ,[AdjBreakEvenMoney]
+          ,[TotalShares]
+          ,[TotalAmount] 
+          ,[AvgPrice]
+          ,[LongAvg%]
+          ,[LongAvg%Reduction]
+          ,[ShortAvg%]
+          ,[ShortAvg%Reduction])
+    VALUES
+          ('" + txtStockProfitLoss.Text.Replace("'", "''") + "'" +  "," + txtOldStockNumbers.Text + "," + txtOldPrice.Text + "," + txtAmountSpent.Text
+         + "," + txtCurrentPrice.Text + "," + txtCurrentAmount.Text + "," + txtLngUpDownAmt.Text + "," + txtLngUpDownStock.Text
+         + "," + txtShortUpDownAmount.Text + "," + txtShortUpDownStock.Text + "," + txtLongProfitLoss.Text + "," + txtLongAvgProfitLoss.Text + "," +
+               txtShortProfitLoss.Text + "," + txtShortAvgProfitLoss.Text + "," + txtBreakEvenMoney.Text + "," + txtUnroundedStockstoBuy.Text
+         + "," + txtRoundedStockstoBuy.Text + "," + txtAdjBreakEvenMoney.Text + "," + txtTotalShares.Text + "," + txtTotalAmount.Text
+         + "," + txtAvgPrice.Text + "," + txtLongAvgPercent.Text + "," + txtLngAvgReductionPercent.Text + "," + txtShortAvgPercent.Text
+         + "," + txtShortAvgReductionPercent.Text + ")";
+                        SqlCommand insertData = new SqlCommand(insertCommandText, dbConnection);
+                        insertData.ExecuteNonQuery();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    //Logging.Logger("SQL exception " + ex.Message);
+                }
+
+
+        }
+
+
+        private void btnCalculate_Click(object sender, EventArgs e)
+        {
+
+           // txtStockProfitLoss.Text 
+            Calculate();
         }
     }
 }

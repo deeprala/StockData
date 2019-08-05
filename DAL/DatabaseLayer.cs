@@ -30,7 +30,10 @@ namespace DAL
 
                         }
                         var updateCommandText = @"update WatchList set [Market Cap]= replace([Market Cap], '|', ','), [Shares] = REPLACE(Shares,'|',','),
-                                          [Volume] = REPLACE(Volume,'|',','), [Description] = REPLACE(Description,'|',','),[Open.Int] = REPLACE([Open.Int],'|',',')";
+                                          [Volume] = REPLACE(Volume,'|',','), [Description] = REPLACE(Description,'|',','),[Open.Int] = REPLACE([Open.Int],'|',','); 
+                                           update WATCHLIST set [%CHANGE] =1 WHERE [%CHANGE] LIKE '<empty>%' AND EX in ('Economic Indicators','Economic IndicatorsCOPY' , 'Interest Rates');
+                                           DELETE FROM WATCHLIST WHERE [%CHANGE] LIKE '<empty>%'";
+                        
                         SqlCommand updateData = new SqlCommand(updateCommandText, dbConnection);
                         updateData.ExecuteNonQuery();
                     }
@@ -45,7 +48,7 @@ namespace DAL
         public static void SaveResultToFile(string ConnectionString, string OutputPath)
         {
             var command = @"SELECT [Description],[EX],[Date],[Symbol],[%Change],[EPS],[PE],[Volume],[Market Cap]
-      ,[Shares],[Net Chng],[52Low],[Low],[Last],[Close],[Open],[High],[52High],[Bid],[Ask] ,[RSI],[Div. Payout Per Share (% of EPS) - Current]      ,[Open.Int]
+      ,[Shares],[Net Chng],[52Low],[Low],[Last],[Close],[Open],[High],[52High],[Bid],[Ask] ,[RSI],[Div. Payout Per Share (% of EPS) - Current],[Open.Int]
       FROM [dbo].[WatchList]";
 
             using (var sqlConnection = new SqlConnection(ConnectionString))
@@ -94,5 +97,6 @@ namespace DAL
             }
 
         }
+
     }
 }
