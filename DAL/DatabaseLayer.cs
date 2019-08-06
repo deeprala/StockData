@@ -37,6 +37,7 @@ namespace DAL
                         SqlCommand updateData = new SqlCommand(updateCommandText, dbConnection);
                         updateData.ExecuteNonQuery();
                     }
+                    Logging.Logger("Successfully updated the database on "+ DateTime.Now);
                 }
                 catch (Exception ex)
                 {
@@ -54,46 +55,57 @@ namespace DAL
             using (var sqlConnection = new SqlConnection(ConnectionString))
             using (var sqlCommand = new SqlCommand(command, sqlConnection))
             {
-                sqlConnection.Open();
-                var sqlDataReader = sqlCommand.ExecuteReader();
-
-
-                string Delimiter = "|";
-                string Separator = ",";
-                string fileName = OutputPath;
-                StreamWriter writer = new StreamWriter(fileName);
-
-                // write header number row - start
-                for (int columnCounter = 0; columnCounter < sqlDataReader.FieldCount; columnCounter++)
+                try
                 {
-                    //add numbers to columns
-                    writer.Write((columnCounter + 1) + Delimiter);
+                    sqlConnection.Open();
+                    var sqlDataReader = sqlCommand.ExecuteReader();
 
-                }
-                writer.WriteLine(string.Empty);
-                //write header number row - end
 
-                //loop to add column header description
-                for (int columnCounter = 0; columnCounter < sqlDataReader.FieldCount; columnCounter++)
-                {
+                    string Delimiter = "|";
+                    string Separator = ",";
+                    string fileName = OutputPath;
+                    StreamWriter writer = new StreamWriter(fileName);
 
-                    writer.Write(sqlDataReader.GetName(columnCounter) + Delimiter);
-                }
-                writer.WriteLine(string.Empty);
+                    // write header number row - start
+                    for (int columnCounter = 0; columnCounter < sqlDataReader.FieldCount; columnCounter++)
+                    {
+                        //add numbers to columns
+                        writer.Write((columnCounter + 1) + Delimiter);
 
-                // data loop
-                while (sqlDataReader.Read())
-                {
-                    // column loop
+                    }
+
+                    writer.WriteLine(string.Empty);
+                    //write header number row - end
+
+                    //loop to add column header description
                     for (int columnCounter = 0; columnCounter < sqlDataReader.FieldCount; columnCounter++)
                     {
 
-                        writer.Write(sqlDataReader.GetValue(columnCounter).ToString().Replace('"', '\'') + Delimiter);
-                    }   // end of column loop
-                    writer.WriteLine(string.Empty);
-                }   // data loop
+                        writer.Write(sqlDataReader.GetName(columnCounter) + Delimiter);
+                    }
 
-                writer.Flush();
+                    writer.WriteLine(string.Empty);
+
+                    // data loop
+                    while (sqlDataReader.Read())
+                    {
+                        // column loop
+                        for (int columnCounter = 0; columnCounter < sqlDataReader.FieldCount; columnCounter++)
+                        {
+
+                            writer.Write(
+                                sqlDataReader.GetValue(columnCounter).ToString().Replace('"', '\'') + Delimiter);
+                        } // end of column loop
+
+                        writer.WriteLine(string.Empty);
+                    } // data loop
+                    writer.Flush();
+                }
+                catch (Exception ex)
+                {
+                    Logging.Logger("Exception writing to the file : "+ ex.Message );
+                }
+
             }
 
         }

@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem("USA");
+            System.Windows.Forms.ListViewItem listViewItem4 = new System.Windows.Forms.ListViewItem("USA");
             this.btnUploadData = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.success = new System.Windows.Forms.Label();
@@ -48,6 +48,9 @@
             this.btnBreakEven = new System.Windows.Forms.Button();
             this.btnMarketCalendar = new System.Windows.Forms.Button();
             this.btnlnkWeb = new System.Windows.Forms.Button();
+            this.btnBackUpDatabase = new System.Windows.Forms.Button();
+            this.txtPathtoBackUpDB = new System.Windows.Forms.TextBox();
+            this.DBBackUpPath = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // btnUploadData
@@ -163,7 +166,7 @@
             // listView1
             // 
             this.listView1.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem1});
+            listViewItem4});
             this.listView1.Location = new System.Drawing.Point(164, 108);
             this.listView1.Name = "listView1";
             this.listView1.Size = new System.Drawing.Size(185, 30);
@@ -228,12 +231,44 @@
             this.btnlnkWeb.Text = "Links to websites";
             this.btnlnkWeb.UseVisualStyleBackColor = true;
             // 
+            // btnBackUpDatabase
+            // 
+            this.btnBackUpDatabase.Location = new System.Drawing.Point(19, 568);
+            this.btnBackUpDatabase.Name = "btnBackUpDatabase";
+            this.btnBackUpDatabase.Size = new System.Drawing.Size(213, 50);
+            this.btnBackUpDatabase.TabIndex = 20;
+            this.btnBackUpDatabase.Text = "Backup Database";
+            this.btnBackUpDatabase.UseVisualStyleBackColor = true;
+            this.btnBackUpDatabase.Click += new System.EventHandler(this.btnBackUpDatabase_Click);
+            // 
+            // txtPathtoBackUpDB
+            // 
+            this.txtPathtoBackUpDB.Location = new System.Drawing.Point(164, 523);
+            this.txtPathtoBackUpDB.Margin = new System.Windows.Forms.Padding(4);
+            this.txtPathtoBackUpDB.Name = "txtPathtoBackUpDB";
+            this.txtPathtoBackUpDB.Size = new System.Drawing.Size(185, 22);
+            this.txtPathtoBackUpDB.TabIndex = 21;
+            this.txtPathtoBackUpDB.Click += new System.EventHandler(this.DBBackUpPath_Click);
+            // 
+            // DBBackUpPath
+            // 
+            this.DBBackUpPath.AutoSize = true;
+            this.DBBackUpPath.Location = new System.Drawing.Point(16, 528);
+            this.DBBackUpPath.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.DBBackUpPath.Name = "DBBackUpPath";
+            this.DBBackUpPath.Size = new System.Drawing.Size(109, 17);
+            this.DBBackUpPath.TabIndex = 22;
+            this.DBBackUpPath.Text = "DB BackUpPath";
+            // 
             // ManageStockData
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.AutoSize = true;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.ClientSize = new System.Drawing.Size(690, 472);
+            this.ClientSize = new System.Drawing.Size(1150, 645);
+            this.Controls.Add(this.DBBackUpPath);
+            this.Controls.Add(this.txtPathtoBackUpDB);
+            this.Controls.Add(this.btnBackUpDatabase);
             this.Controls.Add(this.btnlnkWeb);
             this.Controls.Add(this.btnMarketCalendar);
             this.Controls.Add(this.btnBreakEven);
@@ -282,6 +317,9 @@
         private System.Windows.Forms.Button btnBreakEven;
         private System.Windows.Forms.Button btnMarketCalendar;
         private System.Windows.Forms.Button btnlnkWeb;
+        private System.Windows.Forms.Button btnBackUpDatabase;
+        private System.Windows.Forms.TextBox txtPathtoBackUpDB;
+        private System.Windows.Forms.Label DBBackUpPath;
     }
 }
 

@@ -115,5 +115,27 @@ namespace UploadData
             dataConnectionString = "Data Source=" + strDataserver + ";Initial Catalog=" + strDatabase + "; Integrated Security=SSPI;";
             be.ShowDialog();
         }
+
+        private void btnBackUpDatabase_Click(object sender, EventArgs e)
+        {
+            var DBBackUpPath = txtPathtoBackUpDB.Text;
+            strDataserver = textDataServer.Text.ToLower();
+            strDatabase = textDatabase.Text.ToLower();
+            dataConnectionString = "Data Source=" + strDataserver + ";Initial Catalog=" + strDatabase + "; Integrated Security=SSPI;";
+            BackupService bkBackupService = new BackupService(dataConnectionString, DBBackUpPath);
+            bkBackupService.BackupAllUserDatabases();
+        }
+
+        private void DBBackUpPath_Click(object sender, EventArgs e)
+        {
+            FolderBrowserDialog dialog;
+            dialog = new FolderBrowserDialog();
+
+            if (dialog.ShowDialog() == DialogResult.OK)
+            {
+                txtPathtoBackUpDB.Text = dialog.SelectedPath;
+
+            }
+        }
     }
 }
