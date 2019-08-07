@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.ListViewItem listViewItem4 = new System.Windows.Forms.ListViewItem("USA");
+            System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem("USA");
             this.btnUploadData = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.success = new System.Windows.Forms.Label();
@@ -51,6 +51,7 @@
             this.btnBackUpDatabase = new System.Windows.Forms.Button();
             this.txtPathtoBackUpDB = new System.Windows.Forms.TextBox();
             this.DBBackUpPath = new System.Windows.Forms.Label();
+            this.btnRestoreDB = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnUploadData
@@ -166,7 +167,7 @@
             // listView1
             // 
             this.listView1.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem4});
+            listViewItem1});
             this.listView1.Location = new System.Drawing.Point(164, 108);
             this.listView1.Name = "listView1";
             this.listView1.Size = new System.Drawing.Size(185, 30);
@@ -230,6 +231,7 @@
             this.btnlnkWeb.TabIndex = 19;
             this.btnlnkWeb.Text = "Links to websites";
             this.btnlnkWeb.UseVisualStyleBackColor = true;
+            this.btnlnkWeb.Click += new System.EventHandler(this.btnlnkWeb_Click);
             // 
             // btnBackUpDatabase
             // 
@@ -260,12 +262,23 @@
             this.DBBackUpPath.TabIndex = 22;
             this.DBBackUpPath.Text = "DB BackUpPath";
             // 
+            // btnRestoreDB
+            // 
+            this.btnRestoreDB.Location = new System.Drawing.Point(19, 661);
+            this.btnRestoreDB.Name = "btnRestoreDB";
+            this.btnRestoreDB.Size = new System.Drawing.Size(213, 50);
+            this.btnRestoreDB.TabIndex = 23;
+            this.btnRestoreDB.Text = "Restore Database";
+            this.btnRestoreDB.UseVisualStyleBackColor = true;
+            this.btnRestoreDB.Click += new System.EventHandler(this.btnRestoreDB_Click);
+            // 
             // ManageStockData
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.AutoSize = true;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.ClientSize = new System.Drawing.Size(1150, 645);
+            this.ClientSize = new System.Drawing.Size(1214, 723);
+            this.Controls.Add(this.btnRestoreDB);
             this.Controls.Add(this.DBBackUpPath);
             this.Controls.Add(this.txtPathtoBackUpDB);
             this.Controls.Add(this.btnBackUpDatabase);
@@ -320,6 +333,7 @@
         private System.Windows.Forms.Button btnBackUpDatabase;
         private System.Windows.Forms.TextBox txtPathtoBackUpDB;
         private System.Windows.Forms.Label DBBackUpPath;
+        private System.Windows.Forms.Button btnRestoreDB;
     }
 }
 

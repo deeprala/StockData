@@ -118,12 +118,21 @@ namespace UploadData
 
         private void btnBackUpDatabase_Click(object sender, EventArgs e)
         {
-            var DBBackUpPath = txtPathtoBackUpDB.Text;
-            strDataserver = textDataServer.Text.ToLower();
-            strDatabase = textDatabase.Text.ToLower();
-            dataConnectionString = "Data Source=" + strDataserver + ";Initial Catalog=" + strDatabase + "; Integrated Security=SSPI;";
-            BackupService bkBackupService = new BackupService(dataConnectionString, DBBackUpPath);
-            bkBackupService.BackupAllUserDatabases();
+            try
+            {
+                var DBBackUpPath = txtPathtoBackUpDB.Text;
+                strDataserver = textDataServer.Text.ToLower();
+                strDatabase = textDatabase.Text.ToLower();
+                dataConnectionString = "Data Source=" + strDataserver + ";Initial Catalog=" + strDatabase + "; Integrated Security=SSPI;";
+                BackupService bkBackupService = new BackupService(dataConnectionString, DBBackUpPath);
+                bkBackupService.BackupAllUserDatabases();
+
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show("Failed to backup database: " + exception.Message);
+            }
+           
         }
 
         private void DBBackUpPath_Click(object sender, EventArgs e)
@@ -136,6 +145,45 @@ namespace UploadData
                 txtPathtoBackUpDB.Text = dialog.SelectedPath;
 
             }
+        }
+
+        private void btnRestoreDB_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var targetDirectory = @"C:\Latha\Personal\UploadData\UploadData";
+                var restorePath = @"C:\Latha\Personal\UploadData\UploadData\DBRestore\";
+                string[] fileEntries = Directory.GetFiles(targetDirectory, "*.bak");
+                strDataserver = textDataServer.Text.ToLower();
+                foreach (var fe in fileEntries)
+                {
+                    var filename = Path.GetFileName(fe);
+                    restorePath += filename;
+                    string dbname = null;
+                    int index = filename.IndexOf('-');
+                    if (index > 0)
+                    {
+                        dbname = filename.Substring(0, index) + "_B";
+                    }
+
+                    RestoreDataBase restoreDataBase = new RestoreDataBase();
+                    restoreDataBase.RestoreDatabase(dbname, fe, strDataserver, restorePath);
+                }
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(@"Failed to restore database : " + ex.Message);
+            }
+            
+
+
+        }
+
+        private void btnlnkWeb_Click(object sender, EventArgs e)
+        {
+            Links weblinks = new Links();
+            weblinks.ShowDialog();
         }
     }
 }

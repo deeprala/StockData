@@ -62,6 +62,12 @@
     <Compile Include="BreakEven.Designer.cs">
       <DependentUpon>BreakEven.cs</DependentUpon>
     </Compile>
+    <Compile Include="Links.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Links.Designer.cs">
+      <DependentUpon>Links.cs</DependentUpon>
+    </Compile>
     <Compile Include="ManageStockData.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -72,6 +78,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="BreakEven.resx">
       <DependentUpon>BreakEven.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Links.resx">
+      <DependentUpon>Links.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ManageStockData.resx">
       <DependentUpon>ManageStockData.cs</DependentUpon>
