@@ -22,6 +22,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -62,6 +63,18 @@
     <Compile Include="BreakEven.Designer.cs">
       <DependentUpon>BreakEven.cs</DependentUpon>
     </Compile>
+    <Compile Include="SelectETFs.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SelectETFs.Designer.cs">
+      <DependentUpon>SelectETFs.cs</DependentUpon>
+    </Compile>
+    <Compile Include="EXSelect.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EXSelect.Designer.cs">
+      <DependentUpon>EXSelect.cs</DependentUpon>
+    </Compile>
     <Compile Include="Links.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -78,6 +91,12 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="BreakEven.resx">
       <DependentUpon>BreakEven.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SelectETFs.resx">
+      <DependentUpon>SelectETFs.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EXSelect.resx">
+      <DependentUpon>EXSelect.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Links.resx">
       <DependentUpon>Links.cs</DependentUpon>

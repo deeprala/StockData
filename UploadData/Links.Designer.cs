@@ -47,6 +47,14 @@
             this.linkgooglecalendar = new System.Windows.Forms.LinkLabel();
             this.linkgooglemaps = new System.Windows.Forms.LinkLabel();
             this.lblGoogleStuff = new System.Windows.Forms.Label();
+            this.linkLabelNSEIndia = new System.Windows.Forms.LinkLabel();
+            this.linkLabelBSEIndia = new System.Windows.Forms.LinkLabel();
+            this.linkLabelIIROC = new System.Windows.Forms.LinkLabel();
+            this.linkLabelTSX = new System.Windows.Forms.LinkLabel();
+            this.linkLabelNasdaq = new System.Windows.Forms.LinkLabel();
+            this.linkLabelNYSE = new System.Windows.Forms.LinkLabel();
+            this.label1 = new System.Windows.Forms.Label();
+            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.SuspendLayout();
             // 
             // linkUSAHols
@@ -255,11 +263,106 @@
             this.lblGoogleStuff.TabIndex = 19;
             this.lblGoogleStuff.Text = "Google Stuff";
             // 
+            // linkLabelNSEIndia
+            // 
+            this.linkLabelNSEIndia.AutoSize = true;
+            this.linkLabelNSEIndia.Location = new System.Drawing.Point(26, 445);
+            this.linkLabelNSEIndia.Name = "linkLabelNSEIndia";
+            this.linkLabelNSEIndia.Size = new System.Drawing.Size(70, 17);
+            this.linkLabelNSEIndia.TabIndex = 22;
+            this.linkLabelNSEIndia.TabStop = true;
+            this.linkLabelNSEIndia.Text = "NSE India";
+            this.linkLabelNSEIndia.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.LinkLabelNSEIndia_LinkClicked);
+            // 
+            // linkLabelBSEIndia
+            // 
+            this.linkLabelBSEIndia.AutoSize = true;
+            this.linkLabelBSEIndia.Location = new System.Drawing.Point(26, 402);
+            this.linkLabelBSEIndia.Name = "linkLabelBSEIndia";
+            this.linkLabelBSEIndia.Size = new System.Drawing.Size(69, 17);
+            this.linkLabelBSEIndia.TabIndex = 21;
+            this.linkLabelBSEIndia.TabStop = true;
+            this.linkLabelBSEIndia.Text = "BSE India";
+            this.linkLabelBSEIndia.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.LinkLabelBSEIndia_LinkClicked);
+            // 
+            // linkLabelIIROC
+            // 
+            this.linkLabelIIROC.AutoSize = true;
+            this.linkLabelIIROC.Location = new System.Drawing.Point(26, 359);
+            this.linkLabelIIROC.Name = "linkLabelIIROC";
+            this.linkLabelIIROC.Size = new System.Drawing.Size(44, 17);
+            this.linkLabelIIROC.TabIndex = 20;
+            this.linkLabelIIROC.TabStop = true;
+            this.linkLabelIIROC.Text = "IIROC";
+            this.linkLabelIIROC.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.LinkLabelIIROC_LinkClicked);
+            // 
+            // linkLabelTSX
+            // 
+            this.linkLabelTSX.AutoSize = true;
+            this.linkLabelTSX.Location = new System.Drawing.Point(180, 445);
+            this.linkLabelTSX.Name = "linkLabelTSX";
+            this.linkLabelTSX.Size = new System.Drawing.Size(35, 17);
+            this.linkLabelTSX.TabIndex = 25;
+            this.linkLabelTSX.TabStop = true;
+            this.linkLabelTSX.Text = "TSX";
+            this.linkLabelTSX.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.LinkLabelTSX_LinkClicked);
+            // 
+            // linkLabelNasdaq
+            // 
+            this.linkLabelNasdaq.AutoSize = true;
+            this.linkLabelNasdaq.Location = new System.Drawing.Point(180, 402);
+            this.linkLabelNasdaq.Name = "linkLabelNasdaq";
+            this.linkLabelNasdaq.Size = new System.Drawing.Size(66, 17);
+            this.linkLabelNasdaq.TabIndex = 24;
+            this.linkLabelNasdaq.TabStop = true;
+            this.linkLabelNasdaq.Text = "NASDAQ";
+            this.linkLabelNasdaq.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.LinkLabelNasdaq_LinkClicked);
+            // 
+            // linkLabelNYSE
+            // 
+            this.linkLabelNYSE.AutoSize = true;
+            this.linkLabelNYSE.Location = new System.Drawing.Point(180, 359);
+            this.linkLabelNYSE.Name = "linkLabelNYSE";
+            this.linkLabelNYSE.Size = new System.Drawing.Size(45, 17);
+            this.linkLabelNYSE.TabIndex = 23;
+            this.linkLabelNYSE.TabStop = true;
+            this.linkLabelNYSE.Text = "NYSE";
+            this.linkLabelNYSE.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.LinkLabelNYSE_LinkClicked);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(24, 310);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(127, 25);
+            this.label1.TabIndex = 26;
+            this.label1.Text = "Stock Market";
+            // 
+            // linkLabel1
+            // 
+            this.linkLabel1.AutoSize = true;
+            this.linkLabel1.Location = new System.Drawing.Point(795, 189);
+            this.linkLabel1.Name = "linkLabel1";
+            this.linkLabel1.Size = new System.Drawing.Size(108, 17);
+            this.linkLabel1.TabIndex = 27;
+            this.linkLabel1.TabStop = true;
+            this.linkLabel1.Text = "Google Finance";
+            this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.LinkLabel1_LinkClicked);
+            // 
             // Links
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(996, 678);
+            this.Controls.Add(this.linkLabel1);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.linkLabelTSX);
+            this.Controls.Add(this.linkLabelNasdaq);
+            this.Controls.Add(this.linkLabelNYSE);
+            this.Controls.Add(this.linkLabelNSEIndia);
+            this.Controls.Add(this.linkLabelBSEIndia);
+            this.Controls.Add(this.linkLabelIIROC);
             this.Controls.Add(this.lblGoogleStuff);
             this.Controls.Add(this.linkgooglemaps);
             this.Controls.Add(this.linkgooglecalendar);
@@ -308,5 +411,13 @@
         private System.Windows.Forms.LinkLabel linkgooglecalendar;
         private System.Windows.Forms.LinkLabel linkgooglemaps;
         private System.Windows.Forms.Label lblGoogleStuff;
+        private System.Windows.Forms.LinkLabel linkLabelNSEIndia;
+        private System.Windows.Forms.LinkLabel linkLabelBSEIndia;
+        private System.Windows.Forms.LinkLabel linkLabelIIROC;
+        private System.Windows.Forms.LinkLabel linkLabelTSX;
+        private System.Windows.Forms.LinkLabel linkLabelNasdaq;
+        private System.Windows.Forms.LinkLabel linkLabelNYSE;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.LinkLabel linkLabel1;
     }
 }

@@ -81,11 +81,33 @@ namespace UploadData
             link13.LinkData = "https://www.google.ca/maps?hl=en&tab=cl&authuser=0";
             linkgooglemaps.Links.Add(link13);
 
+            LinkLabel.Link link15 = new LinkLabel.Link();
+            link15.LinkData = "https://www.iiroc.ca/Pages/default.aspx";
+            linkLabelIIROC.Links.Add(link15);
 
+            LinkLabel.Link link16 = new LinkLabel.Link();
+            link16.LinkData = "https://www.bseindia.com/";
+            linkLabelBSEIndia.Links.Add(link16);
 
-            //LinkLabel.Link link15 = new LinkLabel.Link();
-            //link15.LinkData = "https://www.officeholidays.com/countries/usa/2019";
-            //linkCanadaHols.Links.Add(link15);
+            LinkLabel.Link link17 = new LinkLabel.Link();
+            link17.LinkData = "https://www.nseindia.com/";
+            linkLabelNSEIndia.Links.Add(link17);
+
+            LinkLabel.Link link18 = new LinkLabel.Link();
+            link18.LinkData = "https://www.nyse.com/index";
+            linkLabelNYSE.Links.Add(link18);
+
+            LinkLabel.Link link19 = new LinkLabel.Link();
+            link19.LinkData = "https://www.nasdaq.com/";
+            linkLabelNasdaq.Links.Add(link19);
+
+            LinkLabel.Link link20 = new LinkLabel.Link();
+            link20.LinkData = "https://www.tsx.com/";
+            linkLabelTSX.Links.Add(link20);
+
+            LinkLabel.Link link21 = new LinkLabel.Link();
+            link21.LinkData = "https://www.google.ca/finance";
+            linkLabel1.Links.Add(link21);
 
         }
 
@@ -169,5 +191,39 @@ namespace UploadData
             Process.Start(e.Link.LinkData as string);
         }
 
+        private void LinkLabelIIROC_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            Process.Start(e.Link.LinkData as string);
+        }
+
+        private void LinkLabelBSEIndia_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            Process.Start(e.Link.LinkData as string);
+        }
+
+        private void LinkLabelNSEIndia_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            Process.Start(e.Link.LinkData as string);
+        }
+
+        private void LinkLabelNYSE_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            Process.Start(e.Link.LinkData as string);
+        }
+
+        private void LinkLabelNasdaq_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            Process.Start(e.Link.LinkData as string);
+        }
+
+        private void LinkLabelTSX_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            Process.Start(e.Link.LinkData as string);
+        }
+
+        private void LinkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            Process.Start(e.Link.LinkData as string);
+        }
     }
 }

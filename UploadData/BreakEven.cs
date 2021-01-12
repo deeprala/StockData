@@ -155,5 +155,10 @@ namespace UploadData
            // txtStockProfitLoss.Text 
             Calculate();
         }
+
+        private void labelMarginCalculation_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
