@@ -165,5 +165,41 @@ namespace DAL
 
         }
 
+        //CA Web data
+        public static void InsertCAWebDataIntoSQLServerUsingSQLBulkCopy(DataTable csvFileData, string DataConnection)
+        {
+            // change the data source value as needed LN443397
+            using (SqlConnection dbConnection =
+                   new SqlConnection(DataConnection))
+                // using (SqlConnection dbConnection =
+                // new SqlConnection("Data Source=RAMESHI7;Initial Catalog=RAMTEST;Integrated Security=SSPI;"))
+                //RAMESHhrd2in1
+                //rameshdi5
+                try
+                {
+                    {
+                        dbConnection.Open();
+                        using (SqlBulkCopy s = new SqlBulkCopy(dbConnection))
+                        {
+                            try
+                            {
+                                s.DestinationTableName = "CanadaData";
+                                foreach (var column in csvFileData.Columns)
+                                    s.ColumnMappings.Add(column.ToString(), column.ToString());
+                                s.WriteToServer(csvFileData);
+                            }
+                            catch (Exception ex)
+                            { Console.WriteLine("error", ex.Message); }
+
+                        }
+
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Error : " + ex.Message);
+                }
+
+        }
     }
 }

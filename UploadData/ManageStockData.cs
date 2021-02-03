@@ -1,15 +1,14 @@
 ﻿using System;
 using System.Data;
-using System.Data.OleDb;
 using System.Data.SqlClient;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
-using System.Windows.Forms.VisualStyles;
 using SearchOption = System.IO.SearchOption;
 using DAL;
 using BusinessLayer;
-
+using BusinessLayer.CanadaWeb;
+using System.Collections.Generic;
 
 namespace UploadData
 {
@@ -26,6 +25,7 @@ namespace UploadData
         public static string strDatabase;
         public static string dataConnectionString;
         public static string fileDate;
+        public static DataTable csvDataWin;
 
 
         private void btnUploadData_Click(object sender, EventArgs e)
@@ -220,8 +220,331 @@ namespace UploadData
 
         private void CAData_Click(object sender, EventArgs e)
         {
-            // Just a place holder            
+            // Just a place holder 
+            var folderInputPath = new DirectoryInfo(folderPath.Text);
+            //DirectoryInfo(@"C:\Latha\Personal\FormatExcelData\");
+            //@"C:\CSV\Canada\In\
+            var folderOutputPath = textOutputPath.Text.ToLower();
+            dataConnectionString = "Data Source=" + strDataserver + ";Initial Catalog=" + strDatabase + "; Integrated Security=SSPI;";
+            //dataConnectionString = ConfigurationManager.ConnectionStrings["RamTest"].ConnectionString;
+            var builder = new SqlConnectionStringBuilder(dataConnectionString);
+            var databaseName = builder.InitialCatalog;
+            //"Data Source=LN452321 ;Initial Catalog=RamTest; Integrated Security=SSPI;";
+
+            foreach (var file in folderInputPath.EnumerateFiles("*.csv"))
+            {
+                string stockFile = file.FullName.ToLower();
+                fileDate = Path.GetFileName(stockFile).Substring(0, 10);
+                if (stockFile.Contains("win"))
+                {
+                    csvDataWin = CreateDataTable_Win.CreateAndFormatDt(stockFile);
+                    var dtDataTableWin = ExportToCSV.ConvertToCSV(csvDataWin, folderOutputPath + fileDate + @"_Out_Win.csv");
+                    //Write to database table CanadaData
+                    // DatabaseLayer.InsertDataIntoSQLServerUsingSQLBulkCopy(dtDataTableWin, dataConnectionString);
+                    DatabaseLayer.InsertCAWebDataIntoSQLServerUsingSQLBulkCopy(csvDataWin, dataConnectionString);
+
+                }
+
+                else if (stockFile.Contains("linux"))
+                {
+                    var csvDataLinux = CreateDataTable_Linux.CreateAndFormatDt(stockFile);
+                    //Convert Datatable to CSV
+                    ExportToCSV.ConvertToCSV(csvDataLinux, folderOutputPath + fileDate + @"_Out_Linux.csv");
+                    DatabaseLayer.InsertCAWebDataIntoSQLServerUsingSQLBulkCopy(csvDataLinux, dataConnectionString);
+                }
+
+            }
+            //Convert Datatable to CSV
+            //var dtDataTableWin = ExportToCSV.ConvertToCSV(csvDataWin, folderOutputPath + fileDate + @"_Out_Win.csv");
+
+            //Write from DB to file
+            var query = @"SELECT[ALL], [DAY], [date], [Country], [EX], [Description], [Symbol]
+                          , [LP/MA/LC], [% -CHG], [REPORT], [CAT], [CLOSE], [%], [TD], [I], [COM] FROM " + databaseName + ".[dbo].[CanadaData]";
+
+            ExportDataFromDbtoFile.SaveResultToFile(dataConnectionString, folderOutputPath + "\\CanadaData_" + DateTime.Today.Date.ToString("yyyy-MM-dd") + ".csv", query);
+
+            // Create template to upload to get data similar to dashboard
+            var qDate = DateTime.Today.ToString("yyyy-MM-dd");
+            var q5DaysAgoDate = DateTime.Today.AddDays(-5).ToString("yyyy-MM-dd");
+
+            var queryTemplateTSXCOMP = @"SELECT DISTINCT(Symbol),  case country when 'Canada' then 'CA' end as country
+                                       from[dbo].[CanadaData] WHERE[EX] = 'TSX COMP' AND COUNTRY = 'Canada' AND DATE ='" + qDate + "'  ORDER BY SYMBOL ASC";
+            var queryTemplateTSXVENT = @"SELECT DISTINCT(Symbol), case country when 'Canada' then 'CA' end as country 
+                                       from [dbo].[CanadaData] WHERE [EX] ='TSX VENT'  AND COUNTRY = 'Canada' AND  DATE = '" + qDate + "' ORDER BY SYMBOL ASC";
+            var queryTemplateNYSECOMP = @"SELECT DISTINCT(Symbol), case country when 'United States' then 'US'  end as country 
+                                        from [dbo].[CanadaData] WHERE [EX] ='NYSE COMP' AND COUNTRY = 'United States' AND  DATE = '" + qDate + "' ORDER BY SYMBOL ASC";
+            var queryTemplateNASDAQ = @"SELECT DISTINCT(Symbol), case country when 'United States' then 'US' end as country 
+                                        from [dbo].[CanadaData] WHERE [EX] ='NASDAQ'  AND COUNTRY = 'United States' AND  DATE = '" + qDate + "' ORDER BY SYMBOL ASC";
+            var queryTemplateNYSEMKT = @"SELECT DISTINCT(Symbol), case country when 'United States' then 'US' end as country 
+                                       from [dbo].[CanadaData] WHERE [EX] ='NYSE MKT' AND COUNTRY = 'United States' AND  DATE = '" + qDate + "' ORDER BY SYMBOL ASC";
+            var queryTemplateCAHL = @"SELECT DISTINCT (Symbol), case country when 'Canada' then 'CA' end as country 
+                                        from [dbo].[CanadaData]  WHERE COUNTRY in ('Canada') AND EX in ('TSX COMP','TSX VENT')  AND CAT in ('H','L') AND  DATE = '" + qDate + "'  ORDER BY SYMBOL ASC";
+            var queryTemplateUSHL = @"SELECT DISTINCT (Symbol), case country when 'United States' then 'US' end as country 
+                                      from [dbo].[CanadaData]  WHERE COUNTRY in ('United States') AND EX in ('NYSE COMP','NASDAQ' ,'NYSE MKT')  AND CAT in ('H','L') AND  DATE = '" + qDate + "'  ORDER BY SYMBOL ASC ";
+
+            //queries for 5 day date range
+            var queryTemplate5DCAUL = @"SELECT DISTINCT (Symbol), case country when 'Canada' then 'CA' end as country 
+                                        FROM [dbo].[CanadaData]  WHERE COUNTRY in ('Canada') AND EX in ('TSX COMP','TSX VENT')  AND CAT in ('H','L') 
+                                        AND  DATE BETWEEN  '" + q5DaysAgoDate + "' AND '" + qDate + "'  ORDER BY SYMBOL ASC";
+
+            var queryTemplate5DUSUL = @"SELECT DISTINCT(Symbol), case country when 'United States' then 'US' end as country 
+                                      from [dbo].[CanadaData] WHERE COUNTRY in ('United States') AND EX in ('NYSE COMP','NASDAQ' ,'NYSE MKT')  AND CAT in ('H','L')
+                                      AND  DATE BETWEEN  '" + q5DaysAgoDate + "' AND '" + qDate + "'  ORDER BY SYMBOL ASC";
+
+            var queryTemplate5DCAALL = @"SELECT DISTINCT (Symbol), case country when 'Canada' then 'CA' end as country 
+                                         FROM [dbo].[CanadaData]  WHERE COUNTRY in ('Canada') AND EX in ('TSX COMP','TSX VENT')  
+                                         AND  DATE BETWEEN  '" + q5DaysAgoDate + "' AND '" + qDate + "'  ORDER BY SYMBOL ASC";
+
+            var queryTemplate5DUSALL = @"SELECT DISTINCT (Symbol), case country when 'United States' then 'US' end as country  
+                                         FROM [dbo].[CanadaData]  WHERE COUNTRY in ('United States') AND EX in ('NYSE COMP','NASDAQ' ,'NYSE MKT')  
+                                         AND  DATE BETWEEN  '" + q5DaysAgoDate + "' AND '" + qDate + "'  ORDER BY SYMBOL ASC";
+
+            // All data query
+            var queryTemplateTILLDATECA = @"SELECT DISTINCT (Symbol), case country when 'Canada' then 'CA' end as country 
+                                            FROM [dbo].[CanadaData]  WHERE COUNTRY in ('Canada') AND EX in ('TSX COMP','TSX VENT')   ORDER BY SYMBOL ASC";
+
+            var queryTemplateTILLDATEUS = @"SELECT DISTINCT (Symbol), case country when 'United States' then 'US' end as country 
+                                            FROM [dbo].[CanadaData]  WHERE COUNTRY in ('United States') AND EX in ('NYSE COMP','NASDAQ' ,'NYSE MKT')    ORDER BY SYMBOL ASC ";
+
+            // 1DAY all
+            var queryTemplate1DayCA = @"SELECT DISTINCT (Symbol), case country when 'Canada' then 'CA' end as country FROM [dbo].[CanadaData]  
+                                        WHERE COUNTRY in ('Canada') AND EX in ('TSX COMP','TSX VENT') AND  DATE = '" + qDate + "'  ORDER BY SYMBOL ASC";
+
+            var queryTemplate1DayUS = @"SELECT DISTINCT (Symbol), case country when 'United States' then 'US' end as country FROM [dbo].[CanadaData]  
+                                        WHERE COUNTRY in ('United States') AND EX in ('NYSE COMP','NASDAQ' ,'NYSE MKT')   AND   DATE = '" + qDate + "'   ORDER BY SYMBOL ASC";
+
+            var queryTemplateTillDateUSCA = @"SELECT DISTINCT (Symbol),case country when 'United States' then 'US' when 'Canada' then 'CA' end as country 
+                                              FROM [dbo].[CanadaData]  WHERE COUNTRY in ('Canada','United States') AND EX in ('TSX COMP','TSX VENT','NYSE COMP','NASDAQ' ,'NYSE MKT')    ORDER BY SYMBOL ASC";
+
+            List<CATemplateQueryModel> queriesALL, queriesUSMALCPGPLHLTODAY, queriesCAMALCPGPLHLTODAY, queries5DayAndAll, queriesTillDate, queries1DayAll, queriesMonday, queriesTuesday, queriesWednesday, queriesThrusday, queriesFriday;
             
+            QueryList(queryTemplateTSXCOMP, queryTemplateTSXVENT, queryTemplateNYSECOMP,
+                queryTemplateNASDAQ, queryTemplateNYSEMKT, queryTemplateCAHL, queryTemplateUSHL, 
+                queryTemplate5DCAUL, queryTemplate5DUSUL, queryTemplate5DCAALL, queryTemplate5DUSALL, 
+                queryTemplateTILLDATECA, queryTemplateTILLDATEUS, queryTemplateTillDateUSCA, out queriesALL,
+                out queriesUSMALCPGPLHLTODAY, out queriesCAMALCPGPLHLTODAY, out queries5DayAndAll,
+                out queriesTillDate, out queries1DayAll, out queriesMonday, out queriesTuesday, 
+                out queriesWednesday, out queriesThrusday, out queriesFriday);
+
+            var dayOfWeek = DateTime.Today.DayOfWeek.ToString();
+            var outputTemplateDirPath = textOutputPath.Text.ToLower() + @"\";
+            switch (dayOfWeek)
+            {
+                case "Monday":
+                    var outputDirMon = Directory.CreateDirectory(outputTemplateDirPath + qDate + @"\1M-45-51");
+                    foreach (var fileNames in queriesMonday)
+                    {
+                        ExportDataFromDbtoFile.CreateCATemplateFromDb(dataConnectionString, outputTemplateDirPath + qDate + @"\" + outputDirMon + @"\" + fileNames.FileName, fileNames.Query);
+                    }
+                    break;
+                case "Tuesday":
+                    var outputDirTue = Directory.CreateDirectory(outputTemplateDirPath + qDate + @"\2TU-52-58");
+                    foreach (var fileNames in queriesTuesday)
+                    {
+                        ExportDataFromDbtoFile.CreateCATemplateFromDb(dataConnectionString, outputTemplateDirPath + qDate + @"\" + outputDirTue + @"\" + fileNames.FileName, fileNames.Query);
+                    }
+                    break;
+                case "Wednesday":
+                    var outputDirWed = Directory.CreateDirectory(outputTemplateDirPath + qDate + @"\3W-59-65");
+                    foreach (var fileNames in queriesWednesday)
+                    {
+                        ExportDataFromDbtoFile.CreateCATemplateFromDb(dataConnectionString, outputTemplateDirPath + qDate + @"\" + outputDirWed + @"\" + fileNames.FileName, fileNames.Query);
+                    }
+                    break;
+                case "Thursday":
+                    var outputDirThur = Directory.CreateDirectory(outputTemplateDirPath + qDate + @"\4TH-66-72");
+                    foreach (var fileNames in queriesThrusday)
+                    {
+                        ExportDataFromDbtoFile.CreateCATemplateFromDb(dataConnectionString, outputTemplateDirPath + qDate + @"\" + outputDirThur + @"\" + fileNames.FileName, fileNames.Query);
+                    }
+                    break;
+                case "Friday":
+                    var outputDirFri = Directory.CreateDirectory(outputTemplateDirPath + qDate + @"\5F-73-79");
+                    foreach (var fileNames in queriesFriday)
+                    {
+                        ExportDataFromDbtoFile.CreateCATemplateFromDb(dataConnectionString, outputTemplateDirPath + qDate + @"\" + outputDirFri + @"\" + fileNames.FileName, fileNames.Query);
+                    }
+                    break;
+                default:
+                    break;
+
+            }
+            CreateDirectoryAndTemplates(qDate, queriesALL, queriesUSMALCPGPLHLTODAY, queriesCAMALCPGPLHLTODAY,
+                                        queries5DayAndAll, queriesTillDate, queries1DayAll,
+                                        outputTemplateDirPath);
+
+            Cursor = Cursors.Default;
+            var t = Task.Delay(2000);//1 second/1000 ms
+            t.Wait();
+            success.Visible = true;
+        }
+
+        private static void QueryList(string queryTemplateTSXCOMP, string queryTemplateTSXVENT,
+                                          string queryTemplateNYSECOMP, string queryTemplateNASDAQ, 
+                                      string queryTemplateNYSEMKT, string queryTemplateCAHL,
+                                      string queryTemplateUSHL, string queryTemplate5DCAUL, 
+                                      string queryTemplate5DUSUL, string queryTemplate5DCAALL, 
+                                      string queryTemplate5DUSALL, string queryTemplateTILLDATECA, 
+                                      string queryTemplateTILLDATEUS, string queryTemplateTillDateUSCA,
+                                      out List<CATemplateQueryModel> queriesALL,
+                                      out List<CATemplateQueryModel> queriesUSMALCPGPLHLTODAY, 
+                                      out List<CATemplateQueryModel> queriesCAMALCPGPLHLTODAY, 
+                                      out List<CATemplateQueryModel> queries5DayAndAll,
+                                      out List<CATemplateQueryModel> queriesTillDate,
+                                      out List<CATemplateQueryModel> queries1DayAll,
+                                      out List<CATemplateQueryModel> queriesMonday,
+                                      out List<CATemplateQueryModel> queriesTuesday,
+                                      out List<CATemplateQueryModel> queriesWednesday,
+                                      out List<CATemplateQueryModel> queriesThrusday, 
+                                      out List<CATemplateQueryModel> queriesFriday)
+        {
+            queriesALL = new List<CATemplateQueryModel>
+            {
+                new CATemplateQueryModel() { FileName = "Z-109-5D-CA.csv", Query = TemplateQueriesAll.queryTemplateCA5D },
+                new CATemplateQueryModel() { FileName = "Z-110-5D-US.csv", Query = TemplateQueriesAll.queryTemplateUS5D },
+                new CATemplateQueryModel() { FileName = "Z-111-1D-CA.csv", Query = TemplateQueriesAll.queryTemplateCA1D },
+                new CATemplateQueryModel() { FileName = "Z-112-1D-US.csv", Query = TemplateQueriesAll.queryTemplateUS1D},
+                new CATemplateQueryModel() { FileName = "Z-113-tillDate-US.csv", Query = TemplateQueriesAll.queryTemplateUSAllTillDate },
+                new CATemplateQueryModel() { FileName = "Z-114-tillDate-CA.csv", Query = TemplateQueriesAll.queryTemplateCAAllTillDate},
+                new CATemplateQueryModel() { FileName = "Z-115-TODAY.csv", Query = TemplateQueriesAll.queryTemplateAllWebCAUS},
+                new CATemplateQueryModel() { FileName = "Z-116-TILLDATE.csv", Query =  TemplateQueriesAll.queryTemplateCATillDate},
+                new CATemplateQueryModel() { FileName = "Z-117-tillDate-US.csv", Query = TemplateQueriesAll.queryTemplateUSTillDate }
+            };
+
+            queriesUSMALCPGPLHLTODAY = new List<CATemplateQueryModel>
+            {
+                new CATemplateQueryModel() { FileName = "Z-101-T-US-DG.csv", Query = TemplateQueriesUSA.queryTemplateUSDG },
+                new CATemplateQueryModel() { FileName = "Z-102-T-US-DL.csv", Query = TemplateQueriesUSA.queryTemplateUSDL },
+                new CATemplateQueryModel() { FileName = "Z-103-T-US-H.csv", Query = TemplateQueriesUSA.queryTemplateUSH },
+                new CATemplateQueryModel() { FileName = "Z-104-T-US-L.csv", Query = TemplateQueriesUSA.queryTemplateUSL},
+                new CATemplateQueryModel() { FileName = "Z-105-T-US-MA.csv", Query = TemplateQueriesUSA.queryTemplateUSMA },
+                new CATemplateQueryModel() { FileName = "Z-106-T-US-LC.csv", Query = TemplateQueriesUSA.queryTemplateUSLC},
+                new CATemplateQueryModel() { FileName = "Z-107-T-US-PG.csv", Query =  TemplateQueriesUSA.queryTemplateUSPG},
+                new CATemplateQueryModel() { FileName = "Z-108-T-US-PL.csv", Query = TemplateQueriesUSA.queryTemplateUSPL }
+            };
+            queriesCAMALCPGPLHLTODAY = new List<CATemplateQueryModel>
+            {
+                new CATemplateQueryModel() { FileName = "Z-93-T-CA-DG.csv", Query = TemplateQueriesCA.queryTemplateCADG },
+                new CATemplateQueryModel() { FileName = "Z-94-T-CA-DL.csv", Query = TemplateQueriesCA.queryTemplateCADL },
+                new CATemplateQueryModel() { FileName = "Z-95-T-CA-H.csv", Query = TemplateQueriesCA.queryTemplateCAH },
+                new CATemplateQueryModel() { FileName = "Z-96-T-CA-L.csv", Query = TemplateQueriesCA.queryTemplateCAL},
+                new CATemplateQueryModel() { FileName = "Z-97-T-CA-MA.csv", Query = TemplateQueriesCA.queryTemplateCALC},
+                new CATemplateQueryModel() { FileName = "Z-98-T-CA-LC.csv", Query = TemplateQueriesCA.queryTemplateCAMA },
+                new CATemplateQueryModel() { FileName = "Z-99-T-CA-PG.csv", Query =  TemplateQueriesCA.queryTemplateCAPG},
+                new CATemplateQueryModel() { FileName = "Z-100-T-CA-PL.csv", Query = TemplateQueriesCA.queryTemplateCAPL }
+            };
+            queries5DayAndAll = new List<CATemplateQueryModel>
+            {
+                new CATemplateQueryModel() { FileName = "5DCAUL.csv", Query = queryTemplate5DCAUL },
+                new CATemplateQueryModel() { FileName = "5DUSUL.csv", Query = queryTemplate5DUSUL },
+                new CATemplateQueryModel() { FileName = "5DCAALL.csv", Query = queryTemplate5DCAALL },
+                new CATemplateQueryModel() { FileName = "5DUSALL.csv", Query = queryTemplate5DUSALL }
+            };
+            queriesTillDate = new List<CATemplateQueryModel>
+            {
+
+                new CATemplateQueryModel() { FileName = "TILLDATECA.csv", Query = queryTemplateTILLDATECA },
+                new CATemplateQueryModel() { FileName = "TILLDATEUS.csv", Query = queryTemplateTILLDATEUS }
+            };
+            queries1DayAll = new List<CATemplateQueryModel>
+            {
+                new CATemplateQueryModel() { FileName = "1DayCA.csv", Query = queryTemplate5DCAUL },
+                new CATemplateQueryModel() { FileName = "1DayUS.csv", Query = queryTemplate5DUSUL },
+                new CATemplateQueryModel() { FileName = "TILLDATECAUS.csv", Query = queryTemplateTillDateUSCA }
+            };
+            queriesMonday = new List<CATemplateQueryModel>
+            {
+                new CATemplateQueryModel() { FileName = "Z-45-1TSX.csv", Query = queryTemplateTSXCOMP },
+                new CATemplateQueryModel() { FileName = "Z-46-1VENT.csv", Query = queryTemplateTSXVENT },
+                new CATemplateQueryModel() { FileName = "Z-47-1NYSEC.csv", Query = queryTemplateNYSECOMP },
+                new CATemplateQueryModel() { FileName = "Z-48-1NASDAQ.csv", Query = queryTemplateNASDAQ },
+                new CATemplateQueryModel() { FileName = "Z-49-1NYSEM.csv", Query = queryTemplateNYSEMKT },
+                new CATemplateQueryModel() { FileName = "Z-50-1CAHL.csv", Query = queryTemplateCAHL },
+                new CATemplateQueryModel() { FileName = "Z-51-1USHL.csv", Query = queryTemplateUSHL }
+            };
+            queriesTuesday = new List<CATemplateQueryModel>
+            {
+                new CATemplateQueryModel() { FileName = "Z-52-2TSX.csv", Query = queryTemplateTSXCOMP },
+                new CATemplateQueryModel() { FileName = "Z-53-2VENT.csv", Query = queryTemplateTSXVENT },
+                new CATemplateQueryModel() { FileName = "Z-54-2NYSEC.csv", Query = queryTemplateNYSECOMP },
+                new CATemplateQueryModel() { FileName = "Z-55-2NASDAQ.csv", Query = queryTemplateNASDAQ },
+                new CATemplateQueryModel() { FileName = "Z-56-2NYSEM.csv", Query = queryTemplateNYSEMKT },
+                new CATemplateQueryModel() { FileName = "Z-57-2CAHL.csv", Query = queryTemplateCAHL },
+                new CATemplateQueryModel() { FileName = "Z-58-2USHL.csv", Query = queryTemplateUSHL }
+            };
+            queriesWednesday = new List<CATemplateQueryModel>
+            {
+                new CATemplateQueryModel() { FileName = "Z-59-3TSX.csv", Query = queryTemplateTSXCOMP },
+                new CATemplateQueryModel() { FileName = "Z-60-3VENT.csv", Query = queryTemplateTSXVENT },
+                new CATemplateQueryModel() { FileName = "Z-61-3NYSEC.csv", Query = queryTemplateNYSECOMP },
+                new CATemplateQueryModel() { FileName = "Z-62-3NASDAQ.csv", Query = queryTemplateNASDAQ },
+                new CATemplateQueryModel() { FileName = "Z-63-3NYSEM.csv", Query = queryTemplateNYSEMKT },
+                new CATemplateQueryModel() { FileName = "Z-64-3CAHL.csv", Query = queryTemplateCAHL },
+                new CATemplateQueryModel() { FileName = "Z-65-3USHL.csv", Query = queryTemplateUSHL }
+            };
+            queriesThrusday = new List<CATemplateQueryModel>
+            {
+                new CATemplateQueryModel() { FileName = "Z-66-4TSX.csv", Query = queryTemplateTSXCOMP },
+                new CATemplateQueryModel() { FileName = "Z-67-4VENT.csv", Query = queryTemplateTSXVENT },
+                new CATemplateQueryModel() { FileName = "Z-68-4NYSEC.csv", Query = queryTemplateNYSECOMP },
+                new CATemplateQueryModel() { FileName = "Z-69-4NASDAQ.csv", Query = queryTemplateNASDAQ },
+                new CATemplateQueryModel() { FileName = "Z-70-4NYSEM.csv", Query = queryTemplateNYSEMKT },
+                new CATemplateQueryModel() { FileName = "Z-71-4CAHL.csv", Query = queryTemplateCAHL },
+                new CATemplateQueryModel() { FileName = "Z-72-4USHL.csv", Query = queryTemplateUSHL }
+            };
+            queriesFriday = new List<CATemplateQueryModel>
+            {
+                new CATemplateQueryModel() { FileName = "Z-73-5TSX.csv", Query = queryTemplateTSXCOMP },
+                new CATemplateQueryModel() { FileName = "Z-74-5VENT.csv", Query = queryTemplateTSXVENT },
+                new CATemplateQueryModel() { FileName = "Z-75-5NYSEC.csv", Query = queryTemplateNYSECOMP },
+                new CATemplateQueryModel() { FileName = "Z-76-5NASDAQ.csv", Query = queryTemplateNASDAQ },
+                new CATemplateQueryModel() { FileName = "Z-77-5NYSEM.csv", Query = queryTemplateNYSEMKT },
+                new CATemplateQueryModel() { FileName = "Z-78-5CAHL.csv", Query = queryTemplateCAHL },
+                new CATemplateQueryModel() { FileName = "Z-79-5USHL.csv", Query = queryTemplateUSHL }
+            };
+        }
+
+        private static void CreateDirectoryAndTemplates(string qDate, List<CATemplateQueryModel>  queriesALL, List<CATemplateQueryModel> queriesUSMALCPGPLHLTODAY, List<CATemplateQueryModel> queriesCAMALCPGPLHLTODAY, List<CATemplateQueryModel> queries5DayAndAll, List<CATemplateQueryModel> queriesTillDate, List<CATemplateQueryModel> queries1DayAll, string outputTemplateDirPath)
+        {
+            // Create folder and template files for 5day range
+            var outputDir5Day = Directory.CreateDirectory(outputTemplateDirPath + qDate + @"\5DayData");
+            foreach (var fileNames in queries5DayAndAll)
+            {
+                ExportDataFromDbtoFile.CreateCATemplateFromDb(dataConnectionString, outputTemplateDirPath + qDate + @"\" + outputDir5Day + @"\" + fileNames.FileName, fileNames.Query);
+            }
+            // Create folder and template files for all data
+            var outputDirTillDate = Directory.CreateDirectory(outputTemplateDirPath + qDate + @"\TillDateData");
+            foreach (var fileNames in queriesTillDate)
+            {
+                ExportDataFromDbtoFile.CreateCATemplateFromDb(dataConnectionString, outputTemplateDirPath + qDate + @"\" + outputDirTillDate + @"\" + fileNames.FileName, fileNames.Query);
+            }
+            // Create folder and template files for 1day all data
+            var outputDir1DayAll = Directory.CreateDirectory(outputTemplateDirPath + qDate + @"\1DayAllData");
+            foreach (var fileNames in queries1DayAll)
+            {
+                ExportDataFromDbtoFile.CreateCATemplateFromDb(dataConnectionString, outputTemplateDirPath + qDate + @"\" + outputDir1DayAll + @"\" + fileNames.FileName, fileNames.Query);
+            }
+
+            // Create folder and template files for Canada today CA-MALCPGPLHL-TODAY
+            var outputDirCADGDL = Directory.CreateDirectory(outputTemplateDirPath + qDate + @"\CA-MALCPGPLHL-TODAY");
+            foreach (var fileNames in queriesCAMALCPGPLHLTODAY)
+            {
+                ExportDataFromDbtoFile.CreateCATemplateFromDb(dataConnectionString, outputTemplateDirPath + qDate + @"\" + outputDirCADGDL + @"\" + fileNames.FileName, fileNames.Query);
+            }
+
+            // Create folder and template files for USA today US-MALCPGPLHL-TODAY
+            var outputDirUSDGDL = Directory.CreateDirectory(outputTemplateDirPath + qDate + @"\US-MALCPGPLHL-TODAY");
+            foreach (var fileNames in queriesUSMALCPGPLHLTODAY)
+            {
+                ExportDataFromDbtoFile.CreateCATemplateFromDb(dataConnectionString, outputTemplateDirPath + qDate + @"\" + outputDirUSDGDL + @"\" + fileNames.FileName, fileNames.Query);
+            }
+
+            // Create folder and template files for ALL
+            var outputDirAll = Directory.CreateDirectory(outputTemplateDirPath + qDate + @"\All");
+            foreach (var fileNames in queriesALL)
+            {
+                ExportDataFromDbtoFile.CreateCATemplateFromDb(dataConnectionString, outputTemplateDirPath + qDate + @"\" + outputDirAll + @"\" + fileNames.FileName, fileNames.Query);
+            }
         }
 
         private void btnOutputData_Click(object sender, EventArgs e)
@@ -529,25 +852,21 @@ namespace UploadData
                     foreach (var file in diArr[i].EnumerateFiles("*.csv", SearchOption.AllDirectories))
                     {
                         string stockFile = file.FullName.ToLower();
-                        //fileDate = Path.GetFileName(stockFile).Substring(0, 10);
                         DataTable csvData = ProcessStockData.GetCADashboardDataTableFromCSVFile(stockFile, fileDate);
                         DatabaseLayer.InsertCADashboardDataIntoSQL(csvData, dataConnectionString, stockFile);
                     }
                     var outputPath = textOutputPath.Text.ToLower() + @"\AllDataRun_" + fileDate + @".csv";
-                    var query = @"SELECT [Description],[EX],[Date],[DayOfWeek],[Symbol],[%Change],[Last],[EPS],[PE],[Volume],[Market Cap],
-                                [Shares],[Net Chng],[52Low],[Low],[Last],[Close],[Open],[High],[52High],[Bid],[Ask] ,[RSI],[Div. Payout Per Share (% of EPS) - Current],[Open.Int],[MarketCapNum],
-                                [Beta],[Delta],[Gamma],[Theta],[Vega],[Rho],[Div],[Div.Freq],[Div. Payout (% of Earnings) - Current (Annual)],[Div. Per Share - Current],
-                                [Div. Per Share - TTM - Current (Annual)],[Div. Yield - Current],[Earnings Per Share - Current],[Earnings Per Share - TTM - Current (Annual)],
-                                [Sector],[Industry],[Sub-Industry],[Cash Flow Per Share - Current (Annual)],
-                                [Free Cash Flow Per Share - Current (Annual)],[Price / Cash Flow Ratio - Current],
-                                [Book Value Per Share - Current (Annual)],[Book Value Per Share Growth - Current],[Price / Book Value Ratio - Current],
-                                [Price / Earnings Ratio - Current], [Return on Assets (ROA) - Current (Annual)], [ROC], [Return on Equity (ROE) - Current (Annual)], [ROR], 
-                                [Revenue - Current], [MoneyFlow], [MoneyFlowIndex], [MoneyFlowIndexCrossover], [MoneyFlowOscillator], [Back Vol], [DailySMA], 
-                                [Financial Leverage (Assets/Equity) - Current (Annual)],[Front Vol], [Market Cap / Common Equity Ratio - Current], [Market Maker Move], [Momentum], [MomentumCrossover], [MomentumPercent], [MomentumPercentDiff],
-                                [MomentumSMA],[Sizzle Index],[Spreads],[Weighted Back Vol]
-                                 FROM [dbo].[WatchList]";
+                    var query = @"SELECT [Ticker] ,[C] ,[Name] ,[Symbol] ,[EX] ,[Date] ,[DayOfWeek],
+                                [EPS] ,[PE] ,[Yield] ,[% Chg] ,[Change] ,[Price] ,[Ask] ,[Bid] ,[Trd Sz] ,[Ask Sz] 
+                                ,[Bid Sz] ,[Close] ,[52 Week Range] ,[52 High] ,[High] ,[Low] ,[52 Low] ,
+                                 [Open] ,[Call/Put] ,[Imp Vol] ,[Mark] ,[Exch] ,[Mkt Val] ,[Market Cap] ,
+                                 [Shr Os] ,[Volume] ,[AVG Volume 6 Month] ,[Blk Vol] ,
+                                [Opn Int] ,[Day % P/L] ,[Day P/L] ,[% P/L] ,[P/L] ,[Book Cost] ,
+                                [Avg Cost] ,[Entry Date] ,[Quantity] ,[Trade] ,[Trend] ,[Opn Int Chg] ,
+                                [Curr] ,[Q] ,[Div] , [Div Pay Dt] ,[Ex-Div] ,[Exp Dt] ,[Num Trd] ,
+                                [Prc Tck] ,[Quote Trend] ,[Range] ,[Rel Range] ,[Strike]  
+                                FROM [dbo].[CADbWatchList]";
                     DatabaseLayer.SaveResultToFile(dataConnectionString, outputPath, query);
-                    SaveSelectedData();
                 }
                 catch (Exception ex)
                 {
@@ -559,6 +878,26 @@ namespace UploadData
             var t = Task.Delay(2000);//1 second/1000 ms
             t.Wait();
             success.Visible = true;
+        }
+
+        private void button19_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox55_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void folderBrowserDialog1_HelpRequest(object sender, EventArgs e)
+        {
+
         }
     }
 }

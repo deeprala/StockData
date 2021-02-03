@@ -43,6 +43,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CanadaWeb\CATemplateQueryModel.cs" />
+    <Compile Include="CanadaWeb\CreateDataTable_Linux.cs" />
+    <Compile Include="CanadaWeb\CreateDataTable_Win.cs" />
+    <Compile Include="CanadaWeb\ExportDataFromDbtoFile.cs" />
+    <Compile Include="CanadaWeb\ExportToCSV.cs" />
+    <Compile Include="CanadaWeb\TemplateQueries.cs" />
+    <Compile Include="CanadaWeb\Utils.cs" />
     <Compile Include="ProcessStockData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
