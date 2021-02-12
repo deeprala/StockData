@@ -415,9 +415,50 @@ namespace BusinessLayer
                 case "Z86":
                     exchangeCode = "US3-1420-2100";
                     return exchangeCode;
-
                 case "Z87":
                     exchangeCode = "EV";
+                    return exchangeCode;
+                case "Z88":
+                    exchangeCode = "Z-88-TILLDATECA";
+                    return exchangeCode;
+                // case "Z89":
+                //     exchangeCode = "Z-89-NHUS";
+                //    return exchangeCode;
+                //case "Z90":
+                //     exchangeCode = "Z-90-NLUS";
+                //     return exchangeCode;
+
+                case "Z89":
+                    exchangeCode = "Z-89-5DCAHL";
+                    return exchangeCode;
+                case "Z90":
+                    exchangeCode = "Z-90-5DUSHL";
+                    return exchangeCode;
+                case "Z91":
+                    exchangeCode = "Z-91-1DCA";
+                    return exchangeCode;
+                case "Z92":
+                    exchangeCode = "Z-92-1DUS";
+                    return exchangeCode;
+
+                case "Z93":
+                    exchangeCode = "Z-93-5DCAALL";
+                    return exchangeCode;
+                case "Z94":
+                    exchangeCode = "Z-94-5DUSALL";
+                    return exchangeCode;
+                case "Z95":
+                    exchangeCode = "Z-95-5DUSALL";
+                    return exchangeCode;
+                case "Z96":
+                    exchangeCode = "Z-96-NHUS";
+                    return exchangeCode;
+                case "Z97":
+                    exchangeCode = "Z-97-NLUS";
+                    return exchangeCode;
+                    // Z-98-99 FOR SHORT, SHORT1
+                case "Z100":
+                    exchangeCode = "Z-100-5DUSALL";
                     return exchangeCode;
                 default:
                     return exchangeCode = "TSXT";

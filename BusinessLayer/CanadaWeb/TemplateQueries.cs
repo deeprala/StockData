@@ -12,7 +12,7 @@ namespace BusinessLayer.CanadaWeb
         public static string q5DaysAgoDate = DateTime.Today.AddDays(-5).ToString("yyyy-MM-dd");
 
         public static string queryTemplateCADG = @"SELECT DISTINCT(Symbol),  case country when 'Canada' then 'CA' end as country
-                                       from[dbo].[CanadaData] COUNTRY in ('Canada') AND CAT in ('DG')   AND DATE ='" + qDate + "'  ORDER BY SYMBOL ASC";
+                                       from[dbo].[CanadaData] WHERE COUNTRY in ('Canada') AND CAT in ('DG')   AND DATE ='" + qDate + "'  ORDER BY SYMBOL ASC";
         public static string queryTemplateCADL = @"SELECT DISTINCT(Symbol), case country when 'Canada' then 'CA' end as country 
                                        from [dbo].[CanadaData] WHERE COUNTRY in ('Canada') AND CAT in ('DL') AND  DATE = '" + qDate + "' ORDER BY SYMBOL ASC";
         public static string queryTemplateCAH = @"SELECT DISTINCT(Symbol), case country when 'Canada' then 'CA' end as country
@@ -37,7 +37,7 @@ namespace BusinessLayer.CanadaWeb
         public static string q5DaysAgoDate = DateTime.Today.AddDays(-5).ToString("yyyy-MM-dd");
 
         public static string queryTemplateUSDG = @"SELECT DISTINCT(Symbol),  case country when 'United States' then 'US' end as country
-                                       from[dbo].[CanadaData] COUNTRY in ('United States') AND CAT in ('DG')   AND DATE ='" + qDate + "'  ORDER BY SYMBOL ASC";
+                                       from[dbo].[CanadaData] WHERE COUNTRY in ('United States') AND CAT in ('DG')   AND DATE ='" + qDate + "'  ORDER BY SYMBOL ASC";
         public static string queryTemplateUSDL = @"SELECT DISTINCT(Symbol), case country when 'United States' then 'US' end as country 
                                        from [dbo].[CanadaData] WHERE COUNTRY in ('United States') AND CAT in ('DL') AND  DATE = '" + qDate + "' ORDER BY SYMBOL ASC";
         public static string queryTemplateUSH = @"SELECT DISTINCT(Symbol), case country when 'United States' then 'US' end as country
@@ -67,7 +67,7 @@ namespace BusinessLayer.CanadaWeb
         
         //5D USA ALL DIVIDE 710 IF MORE THAN 710 -
         public static string queryTemplateUS5D = @"SELECT DISTINCT(Symbol),  case country when 'United States' then 'US' end as country
-                                       from[dbo].[CanadaData] COUNTRY in ('United States') AND EX in ('NYSE COMP','NASDAQ' ,'NYSE MKT')  AND DATE BETWEEN  '" + q5DaysAgoDate + "' AND '" + qDate + "'  ORDER BY SYMBOL ASC";
+                                       from[dbo].[CanadaData] WHERE COUNTRY in ('United States') AND EX in ('NYSE COMP','NASDAQ' ,'NYSE MKT')  AND DATE BETWEEN  '" + q5DaysAgoDate + "' AND '" + qDate + "'  ORDER BY SYMBOL ASC";
 
         // TODAY CA D CA ALL DIVIDE 710 IF MORE THAN 710 -
         public static string queryTemplateCA1D = @"SELECT DISTINCT(Symbol), case country when 'Canada' then 'CA' end as country 
@@ -95,4 +95,7 @@ namespace BusinessLayer.CanadaWeb
 
 
     }
+
 }
+
+
